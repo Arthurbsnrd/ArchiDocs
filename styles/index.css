@@ -1,7 +1,6 @@
 body{
     overflow-x: hidden;
     padding-bottom: 0!important;
-
 }
 .login-page{
     position: relative;
@@ -52,5 +51,5 @@ body{
 }
 
 .btn-login{
-    background-color: #4c57af !important;
+    background-color: #265265 !important;
 }
