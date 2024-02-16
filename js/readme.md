@@ -1,0 +1,1 @@
+Dans ce dossier il y aura les script js si ils sont nécéssaire (animation par exemple etc)
