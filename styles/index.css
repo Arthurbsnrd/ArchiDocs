@@ -1,0 +1,52 @@
+body{
+    overflow-x: hidden;
+    padding-bottom: 0!important;
+
+}
+.login-page{
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 100vh;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    background-size: cover;
+    background: url(../assets/login/bg-login.jpg) no-repeat center center fixed;
+}
+
+.login-form{
+    max-width: 480px;
+    border-radius: 0;
+    z-index: 2;
+    padding: 3rem;
+    background-color: white;
+    position: relative;
+    width: 100%;
+}
+
+.login-texte{
+    padding: 6rem 3rem;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: relative;
+    color: #fff;
+    background-color: rgba(0,0,0,.3);
+    text-align: center!important;
+}
+
+.login-texte .login-description{
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+}
