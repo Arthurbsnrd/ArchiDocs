@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="d-grid mb-0 text-center">
-                        <button class="btn btn-primary" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
+                        <button class="btn btn-primary btn-login" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
                         </div>
                     </form>
                     <!-- end form-->

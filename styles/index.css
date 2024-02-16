@@ -50,3 +50,7 @@ body{
     left: 0;
     right: 0;
 }
+
+.btn-login{
+    background-color: #4c57af !important;
+}
