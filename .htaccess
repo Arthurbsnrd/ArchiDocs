@@ -1,0 +1,8 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+</IfModule>
+
+RewriteEngine On
+RewriteRule ^inscription$ ./pages/clients/inscription.php 

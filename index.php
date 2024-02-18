@@ -47,6 +47,9 @@
                         <button class="btn btn-primary btn-login" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
                         </div>
                     </form>
+                    <small>
+                        <p class="text-center mt-3">Vous n'avez pas de compte ? <a href="inscription" class="text-primary">S'inscrire</a></p>
+                    </small>
                     <!-- end form-->
                 </div>
 
