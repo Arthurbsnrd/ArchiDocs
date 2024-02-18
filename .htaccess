@@ -6,3 +6,4 @@ Options -Indexes
 
 RewriteEngine On
 RewriteRule ^inscription$ ./pages/clients/inscription.php 
+RewriteRule ^connexion$ ./index.php

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | ArchiDocs</title>
+    <title>Connexion | ArchiDocs</title>
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="shortcut icon" href="./assets/ArchiDocs-Logo.png"/>
