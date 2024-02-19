@@ -21,7 +21,7 @@
             <div class="card-body d-flex flex-column h-100 gap-3">
                 <!-- Logo -->
                 <div class="auth-brand text-center text-lg-start">
-                    <a href="#" class="logo">
+                    <a href="" class="logo">
                         <span><img src="assets/ArchiDocs-Logo.png" alt="logo" height="33"></span>
                     </a>
                 </div>
@@ -48,7 +48,7 @@
                         </div>
                     </form>
                     <small>
-                        <p class="text-center mt-3">Vous n'avez pas de compte ? <a href="inscription" class="text-primary">S'inscrire</a></p>
+                        <p class="text-center mt-3">Vous n'avez pas de compte ? <a href="./pages/clients/inscription.php" class="text-primary">S'inscrire</a></p>
                     </small>
                     <!-- end form-->
                 </div>

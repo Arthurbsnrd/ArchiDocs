@@ -2,3 +2,52 @@
 Fichier à mettre dans tout les fichier qui auront le même style 
 Par exemple style de la navbar, footer, background etc..
 */
+
+/* Nav */
+
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #265265;
+    height: 8svh;
+    justify-content: center;
+}
+
+.nav-item {
+    float: left;
+    display: block;
+    text-align: center;
+    height: 100%;
+}
+
+.nav-item-right{
+    float: right;
+}
+
+.nav-item a {
+    display: flex;
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 14px 16px;
+    height: 100%;
+    width: 10rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-item a:hover:not(.active) {
+    color: #fad152;
+    transform: scale(1.1);
+    transition: all 0.5s ease-out;
+}
+
+.active {
+    background-color: #fad152;
+    color: #265265 !important;
+}
+
+/* Nav */

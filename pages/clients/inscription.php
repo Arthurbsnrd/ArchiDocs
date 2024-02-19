@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription | ArchiDocs</title>
-    <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="shortcut icon" href="./assets/ArchiDocs-Logo.png"/>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="shortcut icon" href="../../assets/ArchiDocs-Logo.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
 </head>
@@ -22,7 +21,7 @@
                 <!-- Logo -->
                 <div class="auth-brand text-center text-lg-start">
                     <a href="#" class="logo">
-                        <span><img src="assets/ArchiDocs-Logo.png" alt="logo" height="33"></span>
+                        <span><img src="../../assets/ArchiDocs-Logo.png" alt="logo" height="33"></span>
                     </a>
                 </div>
 
@@ -63,7 +62,7 @@
                         </div>
                     </form>
                     <small>
-                        <p class="text-center mt-3">Vous avez déjà un compte ? <a href="connexion" class="text-primary">Se connecter</a></p>
+                        <p class="text-center mt-3">Vous avez déjà un compte ? <a href="../../index.php" class="text-primary">Se connecter</a></p>
                     </small>
                     <!-- end form-->
                 </div>
