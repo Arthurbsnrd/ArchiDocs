@@ -34,6 +34,9 @@
       <div class="hamburger__item">
         <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
         <a class="nav-link lienNav" href="">ArchiDocs + <i class="bi bi-database-up"></i></a>
+        
+        <!-- Toujours laisser en dernier -->
+        <a class="nav-link lienNav actif" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
       </div>
     </div>
 </div>

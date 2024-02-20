@@ -20,7 +20,7 @@
 <body>
     <?php include '../../includes/navbar.php'; ?>
     
-    <div class="offres">
+    <div class="contenue offres">
         <div class="bg-card">
             <div class="card-offre">
                 <div class="header-card">

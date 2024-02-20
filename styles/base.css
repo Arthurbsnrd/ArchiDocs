@@ -93,6 +93,12 @@ body{
     transition: 0.5s;
 }
 
+.bottom{
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+}
+
 /* Navbar */
 
 /* Responsive Navbar */
@@ -137,12 +143,16 @@ body{
         font-size: large;
         font-weight: bold;
     }
+    .contenue{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100svh;
+        padding: 20px;
+    }
 }
 
-.bottom{
-    bottom: 0;
-    position: absolute;
-    width: 90%;
-}
 
 /* Fin du code responsive Navbar */
