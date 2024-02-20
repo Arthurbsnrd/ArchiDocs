@@ -139,4 +139,10 @@ body{
     }
 }
 
+.bottom{
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+}
+
 /* Fin du code responsive Navbar */

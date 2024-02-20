@@ -14,7 +14,12 @@
           <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link lienNav actif" href=""> ArchiDocs + <i class="bi bi-database-up"></i></a>
+            <a class="nav-link lienNav" href=""> ArchiDocs + <i class="bi bi-database-up"></i></a>
+        </li>
+        
+        <!-- Toujous à laisser en dernier -->
+        <li class="bottom">
+            <a class="nav-link lienNav actif" href=""> Déconnexion <i class="bi bi-box-arrow-left"></i></a>
         </li>
     </ul>
 </div>
@@ -28,7 +33,7 @@
     <div class="hamburger">
       <div class="hamburger__item">
         <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
-        <a class="nav-link lienNav actif" href="">ArchiDocs + <i class="bi bi-database-up"></i></a>
+        <a class="nav-link lienNav" href="">ArchiDocs + <i class="bi bi-database-up"></i></a>
       </div>
     </div>
 </div>

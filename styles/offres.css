@@ -12,7 +12,7 @@
     padding: 0 10px 20px 0;
     width: 400px;
     height: fit-content;
-    background-color: #d1d1d1;
+    background-color: #ebebeb;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -80,7 +80,7 @@
 
 .btn-achat a{
     width: 80%;
-    background-color: #f1f1f1;
+    background-color: #ebebeb;
     color: #265265;
     border: none;
     border-radius: 5px;
