@@ -1,53 +1,136 @@
-/* 
-Fichier à mettre dans tout les fichier qui auront le même style 
-Par exemple style de la navbar, footer, background etc..
-*/
+/* Navbar */
 
-/* Nav */
-
-.nav-bar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #265265;
-    height: 8svh;
-    justify-content: center;
+.nav-border {
+    z-index: 1;
+    width: 20vw;
+    min-height: 100vh;
+    max-height: fit-content; /* Pour que la navbar puisse déssendre en fonction de la taille de l'écran */
+    padding: 50px;
+    /* background: white;
+    border: 1px solid transparent;
+    border-right: 1px rgba(247, 37, 133, 0.3); 
+    animation: animatedBorderRight 3s infinite; */
+    background: #020024;
+    background: linear-gradient(155deg, #020024 0%, red 0%, #ffab00 12%,
+    #e0ff00 24%, #00ff08 36%, #00e4ff 48%, #0005ff 60%, #fe00e7 72%, #ff0000 84%, #ffa200 100%);
+    position: relative;
+    animation: gradient 3s linear infinite;
 }
 
-.nav-item {
-    float: left;
-    display: block;
-    text-align: center;
+.nav-border::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    position: absolute;
+    filter: blur(7px);
+}
+
+.nav-border .logo-div{
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.nav-border .nav{
+    padding: 20px 50px 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    width: 100%;
     height: 100%;
 }
 
-.nav-item-right{
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 18.75em 31.25em;
+    }
+    100% {
+        background-position: 0.1em 0.1em;
+    }
+}
+
+.lienNav {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    color: black !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.lienNav:hover {
+    border-bottom:1px solid #fad154;
+    color: #fad154 !important;
+}
+
+.lienNav i{
     float: right;
 }
 
-.nav-item a {
-    display: flex;
-    color: white;
-    text-align: center;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 14px 16px;
-    height: 100%;
-    width: 10rem;
-    text-decoration: none;
-    font-size: 1.2rem;
+.actif{
+    border-bottom: 1px solid #fad154;
+    color: #fad154 !important;
+    font-weight: bold !important;
 }
 
-.nav-item a:hover:not(.active) {
-    color: #fad152;
-    transform: scale(1.1);
-    transition: all 0.5s ease-out;
+.nav-item:hover {
+    scale: 1.05;
+    transition: 0.5s;
 }
 
-.active {
-    background-color: #fad152;
-    color: #265265 !important;
+/* Navbar */
+
+/* Responsive Navbar */
+
+.nav-hamburger {
+    display: none;
+}
+.hamburger {
+    display: none;
+}
+@media screen and (max-width: 1180px) {
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-border { /* Barre de navigation de base cacher */
+        display: none;
+    }
+    .nav-hamburger{
+        display: block;
+        position: fixed;
+        background-color: white;
+        width: 100vw;
+        min-height: 5svh;
+        height: fit-content;
+        z-index: 1000;
+    }
+    .hamburger {
+        display: none;
+        width: 100vw;
+        height: 100svh;
+        padding: 20px;
+    }
+    .header{
+        width: 100vw !important;
+        height: 95svh;
+    }
+    .btn-hamburger {
+        display: flex;
+        justify-content: flex-start;
+        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+    }
 }
 
-/* Nav */
+/* Fin du code responsive Navbar */
