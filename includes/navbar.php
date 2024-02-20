@@ -28,7 +28,7 @@
     <div class="hamburger">
       <div class="hamburger__item">
         <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
-        <a class="nav-link lienNav actif" href="">Nos offres <i class="bi bi-database-up"></i></a>
+        <a class="nav-link lienNav actif" href="">ArchiDocs + <i class="bi bi-database-up"></i></a>
       </div>
     </div>
 </div>

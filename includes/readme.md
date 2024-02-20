@@ -1,1 +1,0 @@
-Fichiers comme la navbar etc qu'on pourra coder 1 fois puis importer dans les pages

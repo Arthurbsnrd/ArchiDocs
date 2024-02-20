@@ -21,8 +21,28 @@
     <?php include '../../includes/navbar.php'; ?>
     
     <div class="offres">
+        <div class="bg-card">
+            <div class="card-offre">
+                <div class="header-card">
+                    <div class="logo-offre"><i class="bi bi-graph-up-arrow"></i></div>
+                    <div class="nom-offre">Offre standard</div>
+                </div>
+    
+                <div class="prix-card"><span class="prix">20</span> €</div>
+    
+                <div class="description-card">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto nisi aperiam quam facilis corporis ducimus, assumenda nihil necessitatibus culpa veritatis.
+                </div>
 
+                <div class="btn-achat">
+                    <a href="" class="btn btn-success">Acheter</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <style>
+        
+    </style>
 </body>
 
 </html>

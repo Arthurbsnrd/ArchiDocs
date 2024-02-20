@@ -1,8 +1,15 @@
+body{
+    display: flex;
+    flex-direction: row;
+    
+}
+
 /* Navbar */
 
 .nav-border {
     z-index: 1;
-    width: 20vw;
+    max-width: 480px;
+    width: 100%;
     min-height: 100vh;
     max-height: fit-content; /* Pour que la navbar puisse déssendre en fonction de la taille de l'écran */
     padding: 50px;
@@ -11,8 +18,7 @@
     border-right: 1px rgba(247, 37, 133, 0.3); 
     animation: animatedBorderRight 3s infinite; */
     background: #020024;
-    background: linear-gradient(155deg, #020024 0%, red 0%, #ffab00 12%,
-    #e0ff00 24%, #00ff08 36%, #00e4ff 48%, #0005ff 60%, #fe00e7 72%, #ff0000 84%, #ffa200 100%);
+    background:  linear-gradient(90deg, rgba(255,226,27,1) 0%, rgba(247,181,22,1) 25%, rgba(236,124,15,1) 50%, rgba(225,62,8,1) 75%, rgba(214,0,0,1) 100%);
     position: relative;
     animation: gradient 3s linear infinite;
 }
@@ -68,8 +74,8 @@
 }
 
 .lienNav:hover {
-    border-bottom:1px solid #fad154;
-    color: #fad154 !important;
+    border-bottom:1px solid crimson;
+    color: crimson !important;
 }
 
 .lienNav i{
@@ -77,8 +83,8 @@
 }
 
 .actif{
-    border-bottom: 1px solid #fad154;
-    color: #fad154 !important;
+    border-bottom: 1px solid #dc143c;
+    color: crimson !important;
     font-weight: bold !important;
 }
 
