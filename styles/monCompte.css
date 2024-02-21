@@ -1,5 +1,4 @@
 .monCompte{
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -12,10 +11,10 @@
 }
 
 .monCompte .offre-actuelle{
-    border: 1px solid blue;
     height: 33.33%;
     width: 100%;
     padding: 20px;
+    border-bottom: 1px solid #000;
 }
 
 .offre-actuelle .stockage{
@@ -35,10 +34,10 @@
 }
 
 .monCompte .plus-stockage{
-    border: 1px solid orange;
     height: 33.33%;
     width: 100%;
     padding: 20px;
+    border-bottom: 1px solid #000;
 }
 
 .plus-stockage .btn-achat-stock{
@@ -55,7 +54,6 @@
 }
 
 .monCompte .supp-compte{
-    border: 1px solid green;
     height: 33.33%;
     width: 100%;
     padding: 20px;
