@@ -1,0 +1,63 @@
+.monCompte{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100svh;
+    padding: 2rem;
+    justify-content: space-between;
+}
+
+.monCompte .offre-actuelle{
+    border: 1px solid blue;
+    height: 33.33%;
+    width: 100%;
+    padding: 20px;
+}
+
+.offre-actuelle .stockage{
+    margin-top: 5rem;
+}
+
+.offre-actuelle .stockage .progress{
+    margin-top: 4rem;
+    width: 80%;
+    margin: 0 auto;
+}
+.offre-actuelle .total-stock{
+    width: 80%;
+    margin: 0 auto;
+    font-size: large;
+    font-weight: 600;
+}
+
+.monCompte .plus-stockage{
+    border: 1px solid orange;
+    height: 33.33%;
+    width: 100%;
+    padding: 20px;
+}
+
+.plus-stockage .btn-achat-stock{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.plus-stockage p{
+    margin-top: 1rem;
+    font-size: large;
+    font-weight: 600;
+}
+
+.monCompte .supp-compte{
+    border: 1px solid green;
+    height: 33.33%;
+    width: 100%;
+    padding: 20px;
+
+}

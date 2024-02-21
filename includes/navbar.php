@@ -4,9 +4,15 @@
     <ul class="nav flex-column">
         <!-- Logo -->
         <div class="auth-brand text-center text-lg-start logo-div">
-            <a href="" class="logo">
+            <div class="logo" >
                 <span><img src="../../assets/ArchiDocs-Logo.png" alt="logo" height="60"></span>
+            </div>
+            
+            <a href="../clients/monCompte.php" class="logo" style="text-decoration: none; color: black;">
+                <small style="font-weight: 600;">Mon compte</small>
+                <span><img src="https://www.shareicon.net/data/2017/05/30/886556_user_512x512.png" alt="logo" height="60" style="border-radius: 360px;"></span>
             </a>
+            
         </div>
         <!-- Logo  -->
 
@@ -14,7 +20,7 @@
           <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link lienNav" href=""> ArchiDocs + <i class="bi bi-database-up"></i></a>
+            <a class="nav-link lienNav" href="../clients/offres.php"> ArchiDocs + <i class="bi bi-database-up"></i></a>
         </li>
         
         <!-- Toujous à laisser en dernier -->
