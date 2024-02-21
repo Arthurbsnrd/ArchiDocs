@@ -10,14 +10,14 @@
             
             <a href="../clients/monCompte.php" class="logo" style="text-decoration: none; color: black;">
                 <small style="font-weight: 600;">Mon compte</small>
-                <span><img src="https://www.shareicon.net/data/2017/05/30/886556_user_512x512.png" alt="logo" height="60" style="border-radius: 360px;"></span>
+                <span><img src="../../assets/navbar/pp.png" alt="logo" height="60" style="border-radius: 360px;"></span>
             </a>
             
         </div>
         <!-- Logo  -->
 
         <li class="nav-item">
-          <a class="nav-link lienNav" href="">Mon espace <i class="fab fa-squarespace"></i></a>
+          <a class="nav-link lienNav" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link lienNav" href="../clients/offres.php"> ArchiDocs + <i class="bi bi-database-up"></i></a>
@@ -39,7 +39,7 @@
     <div class="hamburger">
       <div class="hamburger__item">
         <a class="nav-link lienNav" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle"></i></a>
-        <a class="nav-link lienNav" href="">Mon espace <i class="fab fa-squarespace"></i></a>
+        <a class="nav-link lienNav" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
         <a class="nav-link lienNav" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
         
         <!-- Toujours laisser en dernier -->

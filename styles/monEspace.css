@@ -1,0 +1,84 @@
+.monEspace{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+    min-height: 100svh;
+    padding: 2rem;
+    max-height: fit-content;
+    /* border: 1px solid blue; */
+}
+
+.monEspace .header-espace{
+    width: 100%;
+    padding: 1rem;
+    /* border: 1px solid red; */
+}
+
+.monEspace .div-btn-upload{
+    /* border: 1px solid green; */
+    width: 100%;
+    padding: 1rem;
+}
+
+.div-btn-upload .btn-upload{
+    float: right;
+    background-color: #f8ce49;
+    color: #265265;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+.div-btn-upload .btn-upload:hover{
+    background-color: #265265;
+    color: #f8ce49;
+    transition: all 0.3s ease-in-out;
+}
+
+.div-btn-upload .btn-upload:active{
+    transform: scale(0.95);
+    border: none;
+    outline: none;
+}
+
+.liste-fichier{
+    width: 100%;
+    padding: 1rem;
+    /* border: 1px solid black; */
+}
+
+.liste-fichier .les-fichiers{
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.9px);
+    -webkit-backdrop-filter: blur(14.9px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.les-fichiers .fichier{
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.les-fichiers .fichier:hover{
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.9px);
+    -webkit-backdrop-filter: blur(14.9px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    scale: 1.025;
+    transition: all 0.3s ease-in-out;
+}
+
+.les-fichiers .fichier-info a{
+    color: black;
+}
