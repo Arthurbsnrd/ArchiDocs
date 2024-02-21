@@ -42,7 +42,7 @@
             <p>
                 Pour 20€ vous pouvez bénéficier de 20Go de stockage supplémentaire sur notre site, soit 1€ par giga et ceci à vie.
             </p>
-            <a href="" class="btn btn-success btn-achat-stock">Acheter plus de stockage</a>
+            <a href="./offres.php" class="btn btn-success btn-achat-stock">Acheter plus de stockage</a>
             <p>
                 Sinon vous pouvez supprimer vos fichiers inutiles pour libérer de l'espace.
             </p>

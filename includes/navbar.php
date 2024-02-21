@@ -5,7 +5,7 @@
         <!-- Logo -->
         <div class="auth-brand text-center text-lg-start logo-div">
             <div class="logo" >
-                <span><img src="../../assets/ArchiDocs-Logo.png" alt="logo" height="60"></span>
+                <span><img src="../../assets/ArchiDocs-Logo.png" alt="logo" height="50"></span>
             </div>
             
             <a href="../clients/monCompte.php" class="logo" style="text-decoration: none; color: black;">
@@ -17,7 +17,7 @@
         <!-- Logo  -->
 
         <li class="nav-item">
-          <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
+          <a class="nav-link lienNav" href="">Mon espace <i class="fab fa-squarespace"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link lienNav" href="../clients/offres.php"> ArchiDocs + <i class="bi bi-database-up"></i></a>
@@ -38,8 +38,9 @@
     </div>
     <div class="hamburger">
       <div class="hamburger__item">
-        <a class="nav-link lienNav" href="">Mon espace <i class="bi bi-person-circle"></i></a>
-        <a class="nav-link lienNav" href="">ArchiDocs + <i class="bi bi-database-up"></i></a>
+        <a class="nav-link lienNav" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle"></i></a>
+        <a class="nav-link lienNav" href="">Mon espace <i class="fab fa-squarespace"></i></a>
+        <a class="nav-link lienNav" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
         
         <!-- Toujours laisser en dernier -->
         <a class="nav-link lienNav actif" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
