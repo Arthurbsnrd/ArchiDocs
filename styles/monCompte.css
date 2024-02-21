@@ -10,10 +10,11 @@
     justify-content: space-between;
 }
 
-.monCompte .offre-actuelle{
-    height: 33.33%;
+.monCompte .monCompte-element{
+    height: fit-content;
     width: 100%;
     padding: 20px;
+    justify-content: center;
     border-bottom: 1px solid #000;
 }
 
@@ -33,12 +34,6 @@
     font-weight: 600;
 }
 
-.monCompte .plus-stockage{
-    height: 33.33%;
-    width: 100%;
-    padding: 20px;
-    border-bottom: 1px solid #000;
-}
 
 .plus-stockage .btn-achat-stock{
     width: 70%;
@@ -51,11 +46,4 @@
     margin-top: 1rem;
     font-size: large;
     font-weight: 600;
-}
-
-.monCompte .supp-compte{
-    height: 33.33%;
-    width: 100%;
-    padding: 20px;
-
 }

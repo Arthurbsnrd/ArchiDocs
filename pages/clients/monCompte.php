@@ -23,7 +23,12 @@
     <?php include '../../includes/navbar.php'; ?>
     
     <div class="contenue monCompte">
-        <div class="offre-actuelle">
+        <div class="monCompte-element msg-bienvenue">
+            <h3>
+                Bienvenue sur votre compte X
+            </h3>
+        </div>
+        <div class="offre-actuelle monCompte-element">
             <div class="header-offre-actuelle">
                 <div class="nom-offre-actuelle"><h5>Votre stockage disponible: </h5> </div>
                 <div class="stockage">
@@ -37,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="plus-stockage">
+        <div class="plus-stockage monCompte-element">
             <h5>Vous désirez plus de stockage ?</h5>
             <p>
                 Pour 20€ vous pouvez bénéficier de 20Go de stockage supplémentaire sur notre site, soit 1€ par giga et ceci à vie.
@@ -48,7 +53,7 @@
             </p>
             <a href="" class="btn btn-dark  btn-achat-stock btn-look-fich">Consulter mes fichiers</a>
         </div>
-        <div class="supp-compte">
+        <div class="supp-compte monCompte-element">
             <h5>Supprimer mon compte</h5>
             <p>
                 Vous pouvez supprimer votre compte à tout moment, cependant cette action est irréversible. <br>
