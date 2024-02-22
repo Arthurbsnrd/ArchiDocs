@@ -48,9 +48,9 @@ function isPageActive($page_name, $current_page) {
     </div>
     <div class="hamburger">
       <div class="hamburger__item">
-        <a class="nav-link lienNav" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle"></i></a>
-        <a class="nav-link lienNav" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
-        <a class="nav-link lienNav" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('monCompte.php', $current_page); ?>" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle"></i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('monEspace.php', $current_page); ?>" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('offres.php', $current_page); ?>" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
         
         <!-- Toujours laisser en dernier -->
         <a class="nav-link lienNav actif" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
