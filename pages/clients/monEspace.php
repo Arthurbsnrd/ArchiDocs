@@ -75,12 +75,22 @@
                         <select name="tri" id="tri" class="btn btn-dark">
                             <option value="default">Trier par...</option>
                             <option value="date">Trier par date</option>
-                            <option value="name">Trier par nom</option>
-                            <option value="type">Trier par type</option>
+                            <option value="date">Trier par taille</option>
                         </select>
+                            <select name="filtre" id="filtre" class="btn btn-dark">
+                                <option value="default">Filtrer par...</option>
+                                <?php foreach($documents as $document): ?>
+                                    <option value="<?= $document["type"] ?>">Filtrer par <?= $document["type"] ?></option>
+                                <?php endforeach; ?>                                
+                            </select>
                     </div>
                     <button data-bs-toggle="modal" data-bs-target="#uploadModal" class="btn btn-upload">Ajouter un document <i class="fas fa-file-upload"></i></button>
                 </div>
+                <!-- barre de recherche -->
+                <div class="search-bar mb-3">
+                    <input type="text" class="form-control" placeholder="Rechercher un document">
+                </div>
+                
                 <?php foreach($documents as $document): ?>
                     <div class="fichier">
                         <div class="fichier-img">
