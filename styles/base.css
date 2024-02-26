@@ -159,3 +159,12 @@ body{
 
 
 /* Fin du code responsive Navbar */
+
+/* 
+    La page (qui sera à droite de la nav) 
+    prendra automatiquement
+    100% de l'espace restant
+*/
+.contenue{
+    width: 100%;
+}

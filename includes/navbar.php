@@ -33,7 +33,7 @@ function isPageActive($page_name, $current_page) {
         <a class="nav-link lienNav <?php echo isPageActive('offres.php', $current_page); ?>" href="../clients/offres.php"> ArchiDocs + <i class="bi bi-database-up"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../clients/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
       </li>
       <li class="nav-item">
         <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Tableau de bord <i class="badge rounded-pill bg-danger">Admin</i></a>
