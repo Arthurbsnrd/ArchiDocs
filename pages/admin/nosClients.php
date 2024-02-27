@@ -1,30 +1,3 @@
-<?php
-    $documents = [
-        [
-            "id" => 1,
-            "name" => "Document 1",
-            "type" => "word",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ],
-        [
-            "id" => 2,
-            "name" => "Document 2",
-            "type" => "pdf",
-            "size" => "25mo",
-            "date" => "23/03/2024"
-        ],
-        [
-            "id" => 3,
-            "name" => "Document 3",
-            "type" => "excel",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ]
-    ];
-    
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -51,7 +24,7 @@
     
     <div class="contenue nosClients">
         <div class="clients">
-            <div class="client">
+            <a href="" class="client">
                 <div class="client-info">
                     <div class="client-nom"><h4>Nom</h4></div>
                     <div class="client-prenom">Prenom</div>
@@ -61,8 +34,9 @@
                         Stockage utilisé: 15/20Go
                     </small>
                 </div>
-            </div>
-            <div class="client">
+            </a>
+            
+            <a href="" class="client">
                 <div class="client-info">
                     <div class="client-nom"><h4>Nom</h4></div>
                     <div class="client-prenom">Prenom</div>
@@ -72,8 +46,9 @@
                         Stockage utilisé: 15/20Go
                     </small>
                 </div>
-            </div>
-            <div class="client">
+            </a>
+            
+            <a href="" class="client">
                 <div class="client-info">
                     <div class="client-nom"><h4>Nom</h4></div>
                     <div class="client-prenom">Prenom</div>
@@ -83,18 +58,8 @@
                         Stockage utilisé: 15/20Go
                     </small>
                 </div>
-            </div>
-            <div class="client">
-                <div class="client-info">
-                    <div class="client-nom"><h4>Nom</h4></div>
-                    <div class="client-prenom">Prenom</div>
-                </div>
-                <div class="client-stockage">
-                    <small>
-                        Stockage utilisé: 15/20Go
-                    </small>
-                </div>
-            </div>
+            </a>
+            
         </div>
     </div>
 </body>

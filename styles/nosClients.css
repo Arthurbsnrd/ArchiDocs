@@ -1,6 +1,3 @@
-body{
-    background-color: aqua;
-}
 .nosClients{
     border: 1px solid red;
     padding: 4rem;
@@ -16,7 +13,8 @@ body{
 }
 
 .clients .client{
-
+    text-decoration: none;
+    color: white;
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
