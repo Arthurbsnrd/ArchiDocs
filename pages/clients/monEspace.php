@@ -54,21 +54,20 @@
             <h1>Bienvenue sur votre espace</h1>
             <p>Retrouvez ici tout vos documents et ajoutez en d'autre si besoin</p>
         </div>
-
-        <div class="stockage">
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Utilisation de 15Go</div>
-                Espace restant: 5Go
-            </div>
-            <div class="total-stock">
-                <h5>
-                    Total: 20Go
-                </h5>    
-            </div>
-        </div>
         
         <div class="liste-fichier">
             <div class="les-fichiers">
+                <div class="stockage">
+                    <div class="progress" style="color: black;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">Utilisation de 15Go</div>
+                        Espace restant: 5Go
+                    </div>
+                    <div class="total-stock">
+                        <h5>
+                            Total: 20Go
+                        </h5>    
+                    </div>
+                </div>
                 <div class="div-btn-upload">
                     <!-- trier les fichier -->
                     <div class="tri-fichier">

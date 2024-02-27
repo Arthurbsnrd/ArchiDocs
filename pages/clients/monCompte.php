@@ -51,7 +51,7 @@
             <p>
                 Sinon vous pouvez supprimer vos fichiers inutiles pour libérer de l'espace.
             </p>
-            <a href="" class="btn btn-dark  btn-achat-stock btn-look-fich">Consulter mes fichiers</a>
+            <a href="" class="btn btn-info  btn-achat-stock btn-look-fich">Consulter mes fichiers</a>
         </div>
         <div class="supp-compte monCompte-element">
             <h5>Supprimer mon compte</h5>
