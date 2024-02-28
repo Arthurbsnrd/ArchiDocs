@@ -1,21 +1,17 @@
 body{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 /* Navbar */
 
 .nav-border {
     z-index: 1;
-    max-width: 480px;
     width: 100%;
-    min-height: 100vh;
+    height: 8vh;
+    max-height: 200px;
     max-height: fit-content; /* Pour que la navbar puisse déssendre en fonction de la taille de l'écran */
     padding: 50px;
-    /* background: white;
-    border: 1px solid transparent;
-    border-right: 1px rgba(247, 37, 133, 0.3); 
-    animation: animatedBorderRight 3s infinite; */
     background: #020024;
     background:  linear-gradient(90deg, rgba(255,226,27,1) 0%, rgba(247,181,22,1) 25%, rgba(236,124,15,1) 50%, rgba(225,62,8,1) 75%, rgba(214,0,0,1) 100%);
     position: relative;
@@ -45,14 +41,27 @@ body{
 }
 
 .nav-border .nav{
-    padding: 20px 50px 0 0;
+    width: 100%;
     position: absolute;
-    top: 50%;
+    padding: 20px;
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: white;
-    width: 100%;
-    height: 100%;
+}
+
+.left-links{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.right-link{
+    width: 50%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 @keyframes gradient {
@@ -68,10 +77,12 @@ body{
 }
 
 .lienNav {
-    width: 100%;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center;
+    width: 100% !important;
+    margin: 20px;
     height: 50px;
-    border-bottom: 1px solid black;
-    margin-bottom: 10px;
     color: black !important;
     font-family: 'Roboto', sans-serif !important;
 }
@@ -81,8 +92,27 @@ body{
     color: crimson !important;
 }
 
+.btn-deco{
+    background-color: #dc143c;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-deco:hover{
+    color: white !important;
+}
+
 .lienNav i{
     float: right;
+}
+
+.lienNav .badge{
+    position: fixed;
+    margin-left: 110px;
+    margin-top: 25px;
 }
 
 .actif{
@@ -112,7 +142,7 @@ body{
 .hamburger {
     display: none;
 }
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 1280px) {
     body{
         display: flex;
         flex-direction: column;
@@ -135,6 +165,14 @@ body{
         height: 100svh;
         padding: 20px;
     }
+
+    .hamburger__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
     .header{
         width: 100vw !important;
         height: 95svh;
@@ -155,6 +193,23 @@ body{
         height: 100svh;
         padding: 20px;
     }
+    .lienNav {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-around !important;
+    }
+    .lienNav:hover{
+        border-bottom: none;
+    }
+    .actif{
+        border-bottom: none;
+    }
+    .lienNav .badge{
+        position: relative;
+        float: right;
+        margin: 0;
+    }
+
 }
 
 
@@ -167,6 +222,7 @@ body{
 */
 .contenue{
     width: 100%;
-    background-color: #212529;
+    min-height: 100vh;
+    background-image: linear-gradient(to right top, #000000, #200413, #320425, #40003e, #45005e);
     color: white;
 }

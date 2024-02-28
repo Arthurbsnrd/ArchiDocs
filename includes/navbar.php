@@ -12,20 +12,8 @@ function isPageActive($page_name, $current_page) {
 ?>
 
 <div class="nav-border">  
-  <ul class="nav flex-column">
-      <!-- Logo -->
-      <div class="auth-brand text-center text-lg-start logo-div">
-        <div class="logo" >
-            <span><img src="../../assets/ArchiDocs-Logo.png" alt="logo" height="50"></span>
-        </div>
-        
-        <a href="../clients/monCompte.php" class="logo" style="text-decoration: none; color: black;">
-            <small style="font-weight: 600;">Mon compte</small>
-            <span><img src="../../assets/navbar/pp.png" alt="logo" height="60" style="border-radius: 360px;"></span>
-        </a>
-      </div>
-      <!-- Logo  -->
-
+  <ul class="nav">
+    <div class="left-links">
       <li class="nav-item">
         <a class="nav-link lienNav <?php echo isPageActive('monEspace.php', $current_page); ?>" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
       </li>
@@ -36,15 +24,21 @@ function isPageActive($page_name, $current_page) {
         <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Tableau de bord <i class="badge rounded-pill bg-danger">Admin</i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
       </li>
+    </div>
 
-      
       <!-- Toujous à laisser en dernier -->
-      <li class="bottom">
-          <a class="nav-link lienNav actif" href=""> Déconnexion <i class="bi bi-box-arrow-left"></i></a>
-      </li>
-  </ul>
+      <div class="right-link">
+        <span class="nav-item">
+          <a class="nav-link lienNav <?php echo isPageActive('monCompte.php', $current_page); ?>" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle" ></i></a>
+        </span>
+        <span class="nav-item">
+          <a class="nav-link lienNav btn-deco" href=""> Déconnexion <i class="bi bi-box-arrow-left"></i></a>
+        </span>
+      </div>
+      
+    </ul>
 </div>
 
 <!-- Nav hamburger -->
@@ -58,9 +52,11 @@ function isPageActive($page_name, $current_page) {
         <a class="nav-link lienNav <?php echo isPageActive('monCompte.php', $current_page); ?>" href="../clients/monCompte.php">Mon compte <i class="bi bi-person-circle"></i></a>
         <a class="nav-link lienNav <?php echo isPageActive('monEspace.php', $current_page); ?>" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
         <a class="nav-link lienNav <?php echo isPageActive('offres.php', $current_page); ?>" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
         
         <!-- Toujours laisser en dernier -->
-        <a class="nav-link lienNav actif" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
+        <a class="nav-link lienNav btn-deco" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
       </div>
     </div>
 </div>
