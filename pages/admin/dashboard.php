@@ -16,6 +16,41 @@
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icon Bootstrap -->
+    <script>
+            window.onload = function () {
+ 
+            var dataPoints = [];
+            
+            var chart = new CanvasJS.Chart("chartContainer",
+            { 
+                title:{
+                    text:	"Répartition des fichiers par client"
+                },
+                data: [
+                {
+                    type: "pie", // Pour afficher le graphique en camembert
+                    indexLabel: "{label} : #percent%", // Pour afficher le pourcentage
+                    toolTipContent : "{label}: {y} sq. km", // Pour afficher la valeur
+                    dataPoints: dataPoints // Les données
+                }					
+                ]
+            });
+            
+            // Dans cette partie, il faudra remplacer le lien par le lien de l'API qui retourne les données et d'autre information
+            $.get("https://canvasjs.com/data/gallery/php/area-of-continents.xml", function (data) {
+                $(data).find("point").each(function () {
+                    var $dataPoint = $(this);
+                    var label = $dataPoint.find("label").text();
+                    var y = $dataPoint.find("y").text();
+                    dataPoints.push({ label: label, y: parseFloat(y) });
+            
+                });
+                chart.render();
+            });
+            
+            }
+ 
+            </script>
 </head>
 
 
@@ -90,27 +125,13 @@
                        </div>
                    </div> 
                </div>
+               <!-- Repartition des fichier par client -->
+               <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>  
+                <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
             </section>
             <!-- Section: Main chart -->
 
-            <!-- Repartition des fichier par client -->
-            <canvas id="chart-pie"></canvas>
-            <script>
-                const dataPie = {
-                    type: "pie",
-                    data: {
-                        labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-                        datasets: [{
-                        data: [1234, 2234, 3234, 4234],
-                        backgroundColor: ["rgba(117,169,255,0.6)", "rgba(148,223,215,0.6)",
-                            "rgba(208,129,222,0.6)", "rgba(247,127,167,0.6)"
-                        ],
-                        }, ],
-                    },
-                    };
-
-                    new mdb.Chart(document.getElementById("chart-pie"), dataPie);
-            </script>
 
         </div>
     </div>
