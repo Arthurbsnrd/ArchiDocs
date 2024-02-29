@@ -24,7 +24,7 @@ function isPageActive($page_name, $current_page) {
         <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('dashboard.php', $current_page); ?>" href="../admin/dashboard.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
       </li>
     </div>
 
@@ -53,7 +53,7 @@ function isPageActive($page_name, $current_page) {
         <a class="nav-link lienNav <?php echo isPageActive('monEspace.php', $current_page); ?>" href="../clients/monEspace.php">Mon espace <i class="fab fa-squarespace"></i></a>
         <a class="nav-link lienNav <?php echo isPageActive('offres.php', $current_page); ?>" href="../clients/offres.php">ArchiDocs + <i class="bi bi-database-up"></i></a>
         <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="../admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
-        <a class="nav-link lienNav <?php echo isPageActive('statistiques.php', $current_page); ?>" href="../clients/statistiques.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
+        <a class="nav-link lienNav <?php echo isPageActive('dashboard.php', $current_page); ?>" href="../admin/dashboard.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
         
         <!-- Toujours laisser en dernier -->
         <a class="nav-link lienNav btn-deco" href="">Déconnexion <i class="bi bi-box-arrow-left"></i></a>
