@@ -34,7 +34,7 @@ function isPageActive($page_name, $current_page) {
           <a class="nav-link lienNav <?php echo isPageActive('monCompte.php', $current_page); ?>" href="/ArchiDocs/pages/clients/monCompte.php">Mon compte <i class="bi bi-person-circle" ></i></a>
         </span>
         <span class="nav-item">
-          <a class="nav-link lienNav btn-deco" href=""> Déconnexion <i class="bi bi-box-arrow-left"></i></a>
+          <a class="nav-link lienNav btn-deco" href="../../fonctions/deconnexion.php"> Déconnexion <i class="bi bi-box-arrow-left"></i></a>
         </span>
       </div>
       
