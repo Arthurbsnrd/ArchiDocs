@@ -1,3 +1,5 @@
+<?php include '../../fonctions/admin/securityAdmin.php';?>
+
 <?php
     $documents = [
         [

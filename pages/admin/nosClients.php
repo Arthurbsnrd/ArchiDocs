@@ -1,3 +1,5 @@
+<?php include '../../fonctions/admin/securityAdmin.php';?>
+
 <!DOCTYPE html>
 <html lang="fr">
 

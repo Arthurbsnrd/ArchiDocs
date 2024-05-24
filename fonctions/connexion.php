@@ -20,7 +20,7 @@
                     $_SESSION['mail'] = $userInfos['mail'];
                     $_SESSION['role'] = $userInfos['role'];
 
-                    header('Location: ./pages/clients/offres.php');
+                    header('Location: ./pages/clients/monEspace.php');
                 } else {
                     echo "Le mot de passe est incorrect";
                 }
