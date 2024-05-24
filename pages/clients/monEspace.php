@@ -1,4 +1,5 @@
 <?php
+    include '../../fonctions/security.php';
     $documents = [
         [
             "id" => 1,
