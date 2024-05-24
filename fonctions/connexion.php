@@ -14,10 +14,11 @@
             if ($checkIfUserExists->rowCount() == 1) {
                 if (password_verify($password, $userInfos['mdp'])) {
                     $_SESSION['auth'] = true;
-                    $_SESSION['id'] = $userInfos['id'];
+                    $_SESSION['id_user'] = $userInfos['id_user'];
                     $_SESSION['nom'] = $userInfos['nom'];
                     $_SESSION['prenom'] = $userInfos['prenom'];
                     $_SESSION['mail'] = $userInfos['mail'];
+                    $_SESSION['role'] = $userInfos['role'];
 
                     header('Location: ./pages/clients/offres.php');
                 } else {

@@ -9,6 +9,9 @@ function isPageActive($page_name, $current_page) {
     }
     return "";
 }
+
+// Récuperer les informations de l'utilisateur connecté
+$user = $_SESSION;
 ?>
 
 <div class="nav-border">  
@@ -20,12 +23,18 @@ function isPageActive($page_name, $current_page) {
       <li class="nav-item">
         <a class="nav-link lienNav <?php echo isPageActive('offres.php', $current_page); ?>" href="/ArchiDocs/pages/clients/offres.php"> ArchiDocs + <i class="bi bi-database-up"></i></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="/ArchiDocs/pages/admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link lienNav <?php echo isPageActive('dashboard.php', $current_page); ?>" href="/ArchiDocs/pages/admin/dashboard.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
-      </li>
+      <?php
+      if ($user['role'] == 'admin') {
+      ?>
+        <li class="nav-item">
+          <a class="nav-link lienNav <?php echo isPageActive('nosClients.php', $current_page); ?>" href="/ArchiDocs/pages/admin/nosClients.php">Nos clients <i class="badge rounded-pill bg-danger">Admin</i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link lienNav <?php echo isPageActive('dashboard.php', $current_page); ?>" href="/ArchiDocs/pages/admin/dashboard.php">Dashboard <i class="badge rounded-pill bg-danger">Admin</i></a>
+        </li>
+      <?php
+      }
+      ?>
     </div>
 
       <!-- Toujous à laisser en dernier -->
