@@ -11,9 +11,8 @@
             $user_nom = htmlspecialchars($_POST['nom']);
             $user_prenom = htmlspecialchars($_POST['prenom']);
             $user_mail = htmlspecialchars($_POST['mail']);
-            $user_password = password_hash($_POST['mdp'] , PASSWORD_DEFAULT);
-            $user_password_verif = password_hash($_POST['mdpconfirme'] , PASSWORD_DEFAULT);
-
+            $user_password = $_POST['mdp'];
+            $user_password_verif = $_POST['mdpconfirme'];
             //Check if the user already exists on the websit
             $checkIfUserAlreadyExists = $conn->prepare('SELECT mail FROM users WHERE mail = ? ');
             $checkIfUserAlreadyExists->execute(array($user_mail));
@@ -23,6 +22,9 @@
                 // Verify if the password is the same
                 if($user_password == $user_password_verif)
                 {
+                    // Hash du mdp après vérification
+                    $user_password = password_hash($user_password, PASSWORD_DEFAULT);
+
                     //Insert the user on the database
                     $InsertUserOnWebsite = $conn ->prepare('INSERT INTO users(nom, prenom, mail, mdp) VALUES( ?, ?, ?, ?)');
                     $InsertUserOnWebsite->execute(array($user_nom, $user_prenom, $user_mail, $user_password));
@@ -45,7 +47,7 @@
                 }
                 else
                 {
-                    echo "Les mots de passe ne sont pas identiques";
+                    echo "Les mots de passe ne sont pas identiques $user_password ET $user_password_verif";
                 }
 
             }
