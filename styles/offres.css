@@ -78,8 +78,8 @@
     justify-content: center;
 }
 
-.btn-achat a{
-    width: 80%;
+.btn-achat button{
+    width: auto;
     background-color: #ebebeb;
     color: #265265;
     border: none;
@@ -89,7 +89,7 @@
     cursor: pointer;
 }
 
-.btn-achat a:hover{
+.btn-achat button:hover{
     background-color: #265265;
     color: #fff;
     transition: 0.3s;
