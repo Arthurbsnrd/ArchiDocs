@@ -1,9 +1,7 @@
 <?php 
 include '../../fonctions/security.php'; 
 include '../../fonctions/bdd.php';
-?>
 
-<?php 
 // Ici on va récupérer les infos de l'utilisateur connecté pour les afficher
 
 $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');

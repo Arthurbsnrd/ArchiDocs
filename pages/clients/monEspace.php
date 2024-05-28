@@ -1,29 +1,27 @@
 <?php
     include '../../fonctions/security.php';
-    $documents = [
-        [
-            "id" => 1,
-            "name" => "Document 1",
-            "type" => "word",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ],
-        [
-            "id" => 2,
-            "name" => "Document 2",
-            "type" => "pdf",
-            "size" => "25mo",
-            "date" => "23/03/2024"
-        ],
-        [
-            "id" => 3,
-            "name" => "Document 3",
-            "type" => "excel",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ]
-    ];
-    
+    include '../../fonctions/bdd.php';
+
+    // Ici on va récupérer les infos de l'utilisateur connecté pour les afficher
+    $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
+    $queryUser->execute(array($_SESSION['id_user']));
+    $userInfos = $queryUser->fetch();
+
+    // Récupération des fichiers de l'utilisateur avec l'id de session
+    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ?');
+    $queryDocuments->execute(array($_SESSION['id_user']));
+    $documents = $queryDocuments->fetchAll();
+
+    // Récupération du stockage utilisé par l'utilisateur
+    $queryStockageUsed = $conn->prepare('SELECT SUM(taille) as total FROM fichiers WHERE id_user = ?');
+    $queryStockageUsed->execute(array($_SESSION['id_user']));
+    $stockageUsed = $queryStockageUsed->fetch();
+    $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
+
+    $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
+
+    $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +38,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icon Bootstrap -->
@@ -60,12 +58,14 @@
             <div class="les-fichiers">
                 <div class="stockage">
                     <div class="progress" style="color: black;">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">Utilisation de 15Go</div>
-                        Espace restant: 5Go
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?= $pourcentageStockage;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $pourcentageStockage;?>%;">Utilisation de <?= $stockageUsed; ?>Go</div>
+                        <?php if ($stockageRestant > 0){ ?>
+                            Espace restant: <?= round($stockageRestant, 2); ?>Go
+                        <?php } ?>
                     </div>
                     <div class="total-stock">
                         <h5>
-                            Total: 20Go
+                            Total: <?= $userInfos['stockage']; ?>Go
                         </h5>    
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                             <select name="filtre" id="filtre" class="btn btn-dark">
                                 <option value="default">Filtrer par...</option>
                                 <?php foreach($documents as $document): ?>
-                                    <option value="<?= $document["type"] ?>">Filtrer par <?= $document["type"] ?></option>
+                                    <!-- <option value="<?= $document["type"] ?>">Filtrer par <?= $document["type"] ?></option> -->
                                 <?php endforeach; ?>                                
                             </select>
                     </div>
@@ -90,10 +90,14 @@
                 <div class="search-bar mb-3">
                     <input type="text" class="form-control" placeholder="Rechercher un document">
                 </div>
-                
+                <?php if (empty($documents)): ?>
+                    <div class="alert alert-warning" role="alert">
+                        Vous n'avez pas de document pour le moment
+                    </div>
+                <?php endif; ?>
                 <?php foreach($documents as $document): ?>
                     <div class="fichier">
-                        <div class="fichier-img">
+                        <!-- <div class="fichier-img">
                             <?php if($document["type"] == "word"): ?>
                                 <i class="fas fa-file-word"></i>
                             <?php elseif($document["type"] == "pdf"): ?>
@@ -102,11 +106,11 @@
                                 <i class="fas fa-file-excel"></i>
                             <?php endif; ?>
                             <small><?= $document["date"] ?></small>
-                        </div>
+                        </div> -->
                         <div class="fichier-info">
-                            <h3><a href=""><?= $document["name"] ?></a></h3>
-                            <p>Document <?= $document["type"] ?></p>
-                            <p>Taille: <?= $document["size"] ?></p>
+                            <h3><a href=""><?= $document["nom_fichier"] ?></a></h3>
+                            <p>Document <?= $document["id_type"] ?></p>
+                            <p>Taille: <?= round($document["taille"]/1000000, 2) ?> Go</p>
                         </div>
                         <div class="fichier-action">
                             <a href="" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
