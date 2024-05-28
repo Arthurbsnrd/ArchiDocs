@@ -12,6 +12,11 @@
     $queryDocuments->execute(array($_SESSION['id_user']));
     $documents = $queryDocuments->fetchAll();
 
+    // Récupérer les types de fichiers
+    $queryTypes = $conn->prepare('SELECT * FROM types_fichier');
+    $queryTypes->execute();
+    $types = $queryTypes->fetchAll();
+
     // Récupération du stockage utilisé par l'utilisateur
     $queryStockageUsed = $conn->prepare('SELECT SUM(taille) as total FROM fichiers WHERE id_user = ?');
     $queryStockageUsed->execute(array($_SESSION['id_user']));
@@ -79,9 +84,9 @@
                         </select>
                             <select name="filtre" id="filtre" class="btn btn-dark">
                                 <option value="default">Filtrer par...</option>
-                                <?php foreach($documents as $document): ?>
-                                    <!-- <option value="<?= $document["type"] ?>">Filtrer par <?= $document["type"] ?></option> -->
-                                <?php endforeach; ?>                                
+                                <?php foreach($types as $type): ?>
+                                    <option value="<?= $type["id_type_fichier"] ?>"><?= $type["libellé_type"] ?></option>
+                                <?php endforeach; ?>                               
                             </select>
                     </div>
                     <button data-bs-toggle="modal" data-bs-target="#uploadModal" class="btn btn-upload">Ajouter un document <i class="fas fa-file-upload"></i></button>
@@ -96,20 +101,21 @@
                     </div>
                 <?php endif; ?>
                 <?php foreach($documents as $document): ?>
+
+                    <!-- Récupération du type de document pour chaque document -->
+                    <?php
+                        $queryType = $conn->prepare('SELECT * FROM types_fichier WHERE id_type_fichier = ?');
+                        $queryType->execute(array($document["id_type"]));
+                        $type = $queryType->fetch();
+                    ?>
                     <div class="fichier">
-                        <!-- <div class="fichier-img">
-                            <?php if($document["type"] == "word"): ?>
-                                <i class="fas fa-file-word"></i>
-                            <?php elseif($document["type"] == "pdf"): ?>
-                                <i class="fas fa-file-pdf"></i>
-                            <?php elseif($document["type"] == "excel"): ?>
-                                <i class="fas fa-file-excel"></i>
-                            <?php endif; ?>
+                        <div class="fichier-img">
+                            <?= $type["logo"] ?>
                             <small><?= $document["date"] ?></small>
-                        </div> -->
+                        </div>
                         <div class="fichier-info">
                             <h3><a href=""><?= $document["nom_fichier"] ?></a></h3>
-                            <p>Document <?= $document["id_type"] ?></p>
+                            <p>Document <?= $type["libellé_type"] ?></p>
                             <p>Taille: <?= round($document["taille"]/1000000, 2) ?> Go</p>
                         </div>
                         <div class="fichier-action">
