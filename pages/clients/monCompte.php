@@ -89,24 +89,24 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
                 Vous pouvez supprimer votre compte à tout moment, cependant cette action est irréversible. <br>
                 Vous perdrez l'ensemble de vos fichiers stockés sur notre site et ne pourrez plus les récupérer.
             </p>
-            <button type="button" class="btn btn-danger btn-achat-stock" data-bs-toggle="modal" data-bs-target="#delCompte">Supprimer mon compte</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delCompte">Supprimer mon compte</button>
 
-            <div class="modal fade" id="delCompte" tabindex="-1" aria-labelledby="delCompteLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="delCompteLabel">Suppression de compte</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Êtes-vous sûr de vouloir supprimer votre compte ? <br>
-                            Cette action est irréversible.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <a href="" class="btn btn-danger">Supprimer</a>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delCompte" tabindex="-1" aria-labelledby="delCompteLabel" aria-hidden="true" style="color: black;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delCompteLabel">Suppression de compte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer votre compte ? <br>
+                    Cette action est irréversible et supprimera toutes vos données.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="../../fonctions/delCompte.php" class="btn btn-danger">Supprimer</a>
                 </div>
             </div>
         </div>
