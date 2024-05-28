@@ -1,0 +1,8 @@
+# Ignorer tout le contenu du dossier fichiersClient
+fichiersClient/*
+
+# Ne pas ignorer le dossier fichiersClient lui-même
+!fichiersClient/
+
+# Ne pas ignorer ce fichier de maintien si nécessaire
+!.gitignore

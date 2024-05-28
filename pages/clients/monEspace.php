@@ -119,7 +119,7 @@
                             <p>Taille: <?= round($document["taille"]/1000000, 2) ?> Go</p>
                         </div>
                         <div class="fichier-action">
-                            <a href="" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
+                            <a href="<?= $document["chemin"] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
                             <a href="" class="btn btn-danger">Supprimer <i class="bi bi-trash"></i></a>
                         </div>
                     </div>
@@ -137,16 +137,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body upload-form">
-                    <form action="" enctype="multipart/form-data">
+                    <form action="../../fonctions/clients/addDocument.php" enctype="multipart/form-data" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nom du fichier</label>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="mb-3">
+                            <label for="type" class="form-label">Type de fichier</label>
+                            <select name="type" id="type" class="form-select">
+                                <option value="default">Choisir un type de fichier</option>
+                                <?php foreach($types as $type): ?>
+                                    <option value="<?= $type["id_type_fichier"] ?>"><?= $type["libellé_type"] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="file" class="form-label">Choisir un fichier</label>
                             <input type="file" class="form-control" id="file" name="file">
                         </div>
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                        <button type="submit" class="btn btn-primary" name="add_document">Ajouter</button>
                     </form>
                 </div>
             </div>
