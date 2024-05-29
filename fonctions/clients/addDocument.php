@@ -1,8 +1,16 @@
 <?php
 session_start();
 require ('../../fonctions/bdd.php'); // Chemin en partant du fichier front
+include '../../fonctions/security.php';
 
 if(isset($_POST['add_document'])) {
+    $id_user = $_SESSION['id_user'];
+
+    // récupérer les informations de l'utilisateur
+    $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
+    $queryUser->execute(array($id_user));
+    $userInfos = $queryUser->fetch();
+
     // Récupérer les informations du formulaire
     $name = $_POST['name'];
     $type = $_POST['type'];
@@ -14,7 +22,7 @@ if(isset($_POST['add_document'])) {
     }
 
     // Définir le répertoire de destination
-    $uploadDir = '../../fichiersClient/';
+    $uploadDir = '../../fichiersClient/'. $userInfos['nom'].'_'.$userInfos['prenom'].'_'.$userInfos['id_user'].'/';
     
     // vérifie si le dossier existe
     if (!is_dir($uploadDir)) {

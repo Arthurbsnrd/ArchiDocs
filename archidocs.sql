@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 07 mai 2024 à 10:48
+-- Généré le : mer. 29 mai 2024 à 11:50
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -51,8 +51,18 @@ CREATE TABLE `fichiers` (
   `nom_fichier` varchar(255) NOT NULL,
   `taille` float NOT NULL,
   `date` date NOT NULL,
-  `id_type` int(11) NOT NULL
+  `id_type` int(11) NOT NULL,
+  `chemin` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `fichiers`
+--
+
+INSERT INTO `fichiers` (`id_fichier`, `id_user`, `nom_fichier`, `taille`, `date`, `id_type`, `chemin`) VALUES
+(2, 1, 'test', 208176, '2024-05-28', 1, '../../fichiersClient/Capture d\'écran 2024-05-24 161336.png'),
+(4, 1, 'ko', 49055, '2024-05-28', 2, '../../fichiersClient/Capture d\'écran 2024-05-24 103344.png'),
+(5, 1, 'word', 14376, '2024-05-28', 1, '../../fichiersClient/texte_anglais.docx');
 
 -- --------------------------------------------------------
 
@@ -71,8 +81,9 @@ CREATE TABLE `types_fichier` (
 --
 
 INSERT INTO `types_fichier` (`id_type_fichier`, `libellé_type`, `logo`) VALUES
-(1, 'word', '/chemin/logo/word.png'),
-(2, 'pdf', 'chemin...');
+(1, 'Word', '<i class=\"fas fa-file-word\"></i>'),
+(2, 'PDF', '<i class=\"fas fa-file-pdf\"></i>'),
+(3, 'Excel', '<i class=\"fas fa-file-excel\"></i>');
 
 -- --------------------------------------------------------
 
@@ -97,7 +108,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `mail`, `mdp`, `role`, `nom`, `prenom`, `tel`, `adresse`, `stockage`) VALUES
-(1, 'anas@gmail', '$2y$10$41F/5fO7mRX.Ai5DialmTueok9twmJkzvLQ7f6qwBIkWujL2fJnIq', 'client', 'ELK', 'Anas', NULL, NULL, 0);
+(1, 'anas@gmail', '$2y$10$41F/5fO7mRX.Ai5DialmTueok9twmJkzvLQ7f6qwBIkWujL2fJnIq', 'admin', 'ELK', 'Anas', NULL, NULL, 40);
 
 --
 -- Index pour les tables déchargées
@@ -139,19 +150,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `fichiers`
 --
 ALTER TABLE `fichiers`
-  MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `types_fichier`
 --
 ALTER TABLE `types_fichier`
-  MODIFY `id_type_fichier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_type_fichier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
