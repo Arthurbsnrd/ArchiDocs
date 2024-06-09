@@ -36,10 +36,11 @@
                     $usersInfos = $GetInfosOfThisUser->fetch();
     
                     $_SESSION['auth'] = true;
-                    $_SESSION['id'] = $usersInfos['id'];
+                    $_SESSION['id_user'] = $usersInfos['id_user'];
                     $_SESSION['nom'] = $usersInfos['nom'];
                     $_SESSION['prenom'] = $usersInfos['prenom'];
                     $_SESSION['mail'] = $usersInfos['mail'];
+                    $_SESSION['role'] = $usersInfos['role'];
     
                     echo "Vous êtes inscrit sur le site";
     

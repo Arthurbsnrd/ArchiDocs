@@ -21,11 +21,16 @@
     $queryStockageUsed = $conn->prepare('SELECT SUM(taille) as total FROM fichiers WHERE id_user = ?');
     $queryStockageUsed->execute(array($_SESSION['id_user']));
     $stockageUsed = $queryStockageUsed->fetch();
-    $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
+    if ($stockageUsed['total'] == null) {
+        $stockageUsed['total'] = 0;
+        $stockageRestant = $userInfos['stockage'];
+        $pourcentageStockage = 0;
+    } else {
+        $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
+        $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
+        $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
+    }
 
-    $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
-
-    $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
 
 ?>
 
