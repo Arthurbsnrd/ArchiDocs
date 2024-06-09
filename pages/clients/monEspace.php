@@ -8,7 +8,7 @@
     $userInfos = $queryUser->fetch();
 
     // Récupération des fichiers de l'utilisateur avec l'id de session
-    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ?');
+    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ? ORDER BY date DESC');
     $queryDocuments->execute(array($_SESSION['id_user']));
     $documents = $queryDocuments->fetchAll();
 
@@ -120,7 +120,11 @@
                         </div>
                         <div class="fichier-action">
                             <a href="<?= $document["chemin"] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
-                            <a href="" class="btn btn-danger">Supprimer <i class="bi bi-trash"></i></a>
+                            <form action="../../fonctions/clients/delDocument.php" method="post">
+                                <input type="hidden" name="id_fichier" value="<?= $document["id_fichier"] ?>">
+                                <button type="submit" class="btn btn-danger" name="del_document">Supprimer <i class="bi bi-trash"></i></button>
+                            </form>
+                            <!-- <a href="" class="btn btn-danger">Supprimer <i class="bi bi-trash"></i></a> -->
                         </div>
                     </div>
                 <?php endforeach; ?>

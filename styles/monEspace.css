@@ -98,3 +98,11 @@
 .les-fichiers .fichier-info a{
     color: white;
 }
+
+.fichier-action{
+    max-width: 255px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
