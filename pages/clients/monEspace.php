@@ -114,17 +114,16 @@
                             <small><?= $document["date"] ?></small>
                         </div>
                         <div class="fichier-info">
-                            <h3><a href=""><?= $document["nom_fichier"] ?></a></h3>
+                            <h3><a href="<?= $document["chemin"] ?>"><?= $document["nom_fichier"] ?></a></h3>
                             <p>Document <?= $type["libellé_type"] ?></p>
                             <p>Taille: <?= round($document["taille"]/1000000, 2) ?> Go</p>
                         </div>
                         <div class="fichier-action">
-                            <a href="<?= $document["chemin"] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
+                            <a href="<?= $document["chemin"] ?>"  download="<?= $document['nom_fichier'] ?>"class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
                             <form action="../../fonctions/clients/delDocument.php" method="post">
                                 <input type="hidden" name="id_fichier" value="<?= $document["id_fichier"] ?>">
                                 <button type="submit" class="btn btn-danger" name="del_document">Supprimer <i class="bi bi-trash"></i></button>
                             </form>
-                            <!-- <a href="" class="btn btn-danger">Supprimer <i class="bi bi-trash"></i></a> -->
                         </div>
                     </div>
                 <?php endforeach; ?>
