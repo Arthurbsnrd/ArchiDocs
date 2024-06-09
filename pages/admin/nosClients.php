@@ -1,4 +1,21 @@
-<?php include '../../fonctions/admin/securityAdmin.php';?>
+<?php 
+include '../../fonctions/admin/securityAdmin.php';
+include '../../fonctions/bdd.php';
+
+// Récupération des clients
+$queryClients = $conn->prepare('SELECT * FROM users WHERE role = "client"');
+$queryClients->execute();
+$clients = $queryClients->fetchAll();
+
+// Récupération du stockage utilisé par chaque client
+foreach ($clients as $key => $client) {
+    $queryStockage = $conn->prepare('SELECT SUM(taille) as stockage FROM fichiers WHERE id_user = :id_user');
+    $queryStockage->execute(['id_user' => $client['id_user']]);
+    $stockage = $queryStockage->fetch();
+    $stockageUtilise = $stockage['stockage'] / 1000000; // On convertit en Go
+    $stockageUtilise = round($stockageUtilise, 2);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,42 +43,20 @@
     
     <div class="contenue nosClients">
         <div class="clients">
-            <!-- Il faudra rajouter l'id ou autre après -->
-            <a href="./espaceClient.php" class="client">
-                <div class="client-info">
-                    <div class="client-nom"><h4>Nom</h4></div>
-                    <div class="client-prenom">Prenom</div>
-                </div>
-                <div class="client-stockage">
-                    <small>
-                        Stockage utilisé: 15/20Go
-                    </small>
-                </div>
-            </a>
             
-            <a href="./espaceClient.php" class="client">
-                <div class="client-info">
-                    <div class="client-nom"><h4>Nom</h4></div>
-                    <div class="client-prenom">Prenom</div>
-                </div>
-                <div class="client-stockage">
-                    <small>
-                        Stockage utilisé: 15/20Go
-                    </small>
-                </div>
-            </a>
-            
-            <a href="./espaceClient.php" class="client">
-                <div class="client-info">
-                    <div class="client-nom"><h4>Nom</h4></div>
-                    <div class="client-prenom">Prenom</div>
-                </div>
-                <div class="client-stockage">
-                    <small>
-                        Stockage utilisé: 15/20Go
-                    </small>
-                </div>
-            </a>
+            <?php foreach ($clients as $client) { ?>
+                <a href="./espaceClient.php?id=<?= $client['id_user'] ?>" class="client">
+                    <div class="client-info">
+                        <div class="client-nom"><h4><?= $client['nom'] ?></h4></div>
+                        <div class="client-prenom"><?= $client['prenom'] ?></div>
+                    </div>
+                    <div class="client-stockage">
+                        <small>
+                            Stockage utilisé: <?= $stockageUtilise ?>Go
+                        </small>
+                    </div>
+                </a>
+            <?php } ?>
             
         </div>
     </div>
