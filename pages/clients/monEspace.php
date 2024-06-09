@@ -8,7 +8,7 @@
     $userInfos = $queryUser->fetch();
 
     // Récupération des fichiers de l'utilisateur avec l'id de session
-    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ? ORDER BY date DESC');
+    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ? ORDER BY id_fichier DESC');
     $queryDocuments->execute(array($_SESSION['id_user']));
     $documents = $queryDocuments->fetchAll();
 
