@@ -1,4 +1,43 @@
-<?php include '../../fonctions/admin/securityAdmin.php';?>
+<?php 
+include '../../fonctions/admin/securityAdmin.php';
+include '../../fonctions/bdd.php';
+
+// Récupération des clients
+$queryClients = $conn->prepare('SELECT * FROM users WHERE role = "client"');
+$queryClients->execute();
+$clients = $queryClients->fetchAll();
+
+// Récupération du stockage utilisé par chaque client
+$clientsData = [];
+foreach ($clients as $key => $client) {
+    $queryStockage = $conn->prepare('SELECT SUM(taille) as stockage FROM fichiers WHERE id_user = :id_user');
+    $queryStockage->execute(['id_user' => $client['id_user']]);
+    $stockage = $queryStockage->fetch();
+    $stockageUtilise = $stockage['stockage'] / 1000000; // On convertit en Go
+    $stockageUtilise = round($stockageUtilise, 2);
+
+    $clientsData[] = [
+        'label' => $client['nom']." ".$client['prenom'],
+        'y' => $stockageUtilise
+    ];
+}
+
+// Convertir les données en JSON pour les utiliser dans le JavaScript
+$clientsDataJSON = json_encode($clientsData);
+
+// Récupération du nombre de fichier dépôsé aujourd'hui par des clients
+$queryFichiers = $conn->prepare('SELECT *, users.id_user, users.role FROM fichiers INNER JOIN users ON fichiers.id_user = users.id_user WHERE date = CURDATE() AND role = "client"');
+$queryFichiers->execute();
+$fichiersDuJour = $queryFichiers->fetchAll();
+$nbFichiersDuJour = count($fichiersDuJour);
+
+// Récupérer les fichiers déposés par les clients
+$queryFichiers = $conn->prepare('SELECT *, users.id_user, users.role FROM fichiers INNER JOIN users ON fichiers.id_user = users.id_user WHERE role = "client"');
+$queryFichiers->execute();
+$fichiers = $queryFichiers->fetchAll();
+$nbFichiers = count($fichiers);
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,42 +58,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icon Bootstrap -->
     <script>
-            window.onload = function () {
- 
-            var dataPoints = [];
+        window.onload = function () {
+            var dataPoints = <?php echo $clientsDataJSON; ?>;
             
-            var chart = new CanvasJS.Chart("chartContainer",
-            { 
-                title:{
-                    text:	"Répartition des fichiers par client"
+            var chart = new CanvasJS.Chart("chartContainer", { 
+                title: {
+                    text: "Répartition des fichiers par client"
                 },
                 data: [
-                {
-                    type: "pie", // Pour afficher le graphique en camembert
-                    indexLabel: "{label} : #percent%", // Pour afficher le pourcentage
-                    toolTipContent : "{label}: {y} sq. km", // Pour afficher la valeur
-                    dataPoints: dataPoints // Les données
-                }					
+                    {
+                        type: "pie", // Pour afficher le graphique en camembert
+                        indexLabel: "{label} : #percent%", // Pour afficher le pourcentage
+                        toolTipContent: "{label}: {y} Go", // Pour afficher la valeur
+                        dataPoints: dataPoints // Les données
+                    }
                 ]
             });
-            
-            // Dans cette partie, il faudra remplacer le lien par le lien de l'API qui retourne les données et d'autre information
-            $.get("https://canvasjs.com/data/gallery/php/area-of-continents.xml", function (data) {
-                $(data).find("point").each(function () {
-                    var $dataPoint = $(this);
-                    var label = $dataPoint.find("label").text();
-                    var y = $dataPoint.find("y").text();
-                    dataPoints.push({ label: label, y: parseFloat(y) });
-            
-                });
-                chart.render();
-            });
-            
-            }
- 
-            </script>
-</head>
 
+            chart.render();
+        }
+    </script>
+</head>
 
 <body>
     <?php include '../../includes/navbar.php'; ?>
@@ -79,7 +103,7 @@
                            </div>
                            <div class="align-self-center">
                                <?php
-                               echo "<h2 class='h1 mb-0'> 78 </h2>";
+                               echo "<h2 class='h1 mb-0'>" . count($clients) . "</h2>";
                                ?>
                            </div>
                            </div>
@@ -100,7 +124,7 @@
                                </div>
                            </div>
                            <div class="align-self-center">
-                               <h2 class="h1 mb-0"><?php echo "150"; ?></h2>
+                               <h2 class="h1 mb-0"><?php echo $nbFichiers; ?></h2>
                            </div>
                            </div>
                        </div>
@@ -120,7 +144,7 @@
                                </div>
                            </div>
                            <div class="align-self-center">
-                               <h2 class="h1 mb-0"><?php echo "17"; ?></h2>
+                               <h2 class="h1 mb-0"><?php echo $nbFichiersDuJour; ?></h2>
                            </div>
                            </div>
                        </div>
@@ -133,8 +157,6 @@
                 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
             </section>
             <!-- Section: Main chart -->
-
-
         </div>
     </div>
 </body>
