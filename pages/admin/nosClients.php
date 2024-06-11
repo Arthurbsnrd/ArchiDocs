@@ -43,21 +43,26 @@ foreach ($clients as $key => $client) {
     
     <div class="contenue nosClients">
         <div class="clients">
-            
-            <?php foreach ($clients as $client) { ?>
-                <a href="./espaceClient.php?id=<?= $client['id_user'] ?>" class="client">
-                    <div class="client-info">
-                        <div class="client-nom"><h4><?= $client['nom'] ?></h4></div>
-                        <div class="client-prenom"><?= $client['prenom'] ?></div>
-                    </div>
-                    <div class="client-stockage">
-                        <small>
-                            Stockage utilisé: <?= $stockageUtilise ?>Go
-                        </small>
-                    </div>
-                </a>
+            <?php if (empty($clients)) { ?>
+                <div class="alert alert-warning" role="alert">
+                    Aucun client n'a été trouvé
+                </div>
+            <?php }  else { ?>
+                <?php foreach ($clients as $client) { ?>
+                    <a href="./espaceClient.php?id=<?= $client['id_user'] ?>" class="client">
+                        <div class="client-info">
+                            <div class="client-nom"><h4><?= $client['nom'] ?></h4></div>
+                            <div class="client-prenom"><?= $client['prenom'] ?></div>
+                        </div>
+                        <div class="client-stockage">
+                            <small>
+                                Stockage utilisé: <?= $stockageUtilise ?>Go
+                            </small>
+                        </div>
+                    </a>
+                <?php } ?>
             <?php } ?>
-            
+                    
         </div>
     </div>
 </body>
