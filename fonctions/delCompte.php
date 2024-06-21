@@ -1,4 +1,16 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require('../vendor/phpmailer/phpmailer/src/Exception.php');
+require('../vendor/phpmailer/phpmailer/src/PHPMailer.php');
+require('../vendor/phpmailer/phpmailer/src/SMTP.php');
+
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
 session_start();
 require ('../fonctions/bdd.php'); // Chemin en partant du fichier d'inscription (form en front)
 
@@ -31,6 +43,42 @@ foreach ($fichiers as $fichier) {
     $deleteFichier = $conn->prepare('DELETE FROM fichiers WHERE id_fichier = ?');
     $deleteFichier->execute(array($fichier['id_fichier']));
 }
+
+// Envoie d'un mail de confirmation
+$queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
+$queryUser->execute(array($id_user));
+$userInfos = $queryUser->fetch();
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
+    $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
+    $mail->addAddress($userInfos['mail'], $userInfos['prenom'] . ' ' . $userInfos['nom']);     //Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Mail de l'administrateur
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Suppression de votre compte ArchiDocs';
+    $mail->Body    = 'Bonjour, votre compte <bArchidocs</b> à été supprimé avec succès !';
+
+    $mail->send();
+    echo 'Message Envoyé !';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
 
 // Supprimer l'utilisateur
 $deleteUser = $conn->prepare('DELETE FROM users WHERE id_user = ?');
