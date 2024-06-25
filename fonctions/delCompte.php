@@ -128,6 +128,6 @@ $deleteUser = $conn->prepare('DELETE FROM users WHERE id_user = ?');
 $deleteUser->execute(array($id_user));
 
 session_destroy();
-// header('Location: ../index.php');
+header('Location: ../index.php');
 
 ?>
