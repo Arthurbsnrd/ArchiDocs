@@ -21,6 +21,8 @@ $getFichiers = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ?');
 $getFichiers->execute(array($id_user));
 $fichiers = $getFichiers->fetchAll();
 
+$nbFichiers = count($fichiers);
+
 // Supprimer tout les fichiers de l'utilisateur
 foreach ($fichiers as $fichier) {
     // Supprimer les fichiers du serveur
@@ -44,40 +46,81 @@ foreach ($fichiers as $fichier) {
     $deleteFichier->execute(array($fichier['id_fichier']));
 }
 
-// Envoie d'un mail de confirmation
+// Récupérer toutes les informations de l'utilisateur
 $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
 $queryUser->execute(array($id_user));
 $userInfos = $queryUser->fetch();
 
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+$queryAdmin = $conn->prepare('SELECT * FROM users WHERE role = ?');
+$queryAdmin->execute(array('admin'));
+$adminInfos = $queryAdmin->fetch();
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
-    $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-    $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
-    $mail->addAddress($userInfos['mail'], $userInfos['prenom'] . ' ' . $userInfos['nom']);     //Add a recipient
-    // $mail->addAddress('ellen@example.com');               // Mail de l'administrateur
+if (!empty($userInfos)) {
+    // Envoie d'un mail de confirmation
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Suppression de votre compte ArchiDocs';
-    $mail->Body    = 'Bonjour, votre compte <bArchidocs</b> à été supprimé avec succès !';
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
+        $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    $mail->send();
-    echo 'Message Envoyé !';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        //Recipients
+        $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
+        $mail->addAddress($userInfos['mail'], $userInfos['prenom'] . ' ' . $userInfos['nom']);     //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Suppression de votre compte ArchiDocs';
+        $mail->Body    = 'Bonjour, votre compte <bArchidocs</b> à été supprimé avec succès !';
+
+        $mail->send();
+        echo 'Message Envoyé !';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
 }
+
+if (!empty($adminInfos)) {
+    // Envoie d'un mail de confirmation
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
+        $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
+        $mail->addAddress($adminInfos['mail']);     //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Suppression du compte ArchiDocs de ' . $userInfos['prenom'] . ' ' . $userInfos['nom'];
+        $mail->Body    = 'Bonjour, le compte <bArchidocs</b> de ' . $userInfos['prenom'] . ' ' . $userInfos['nom'] . ' à été supprimé avec succès !
+        <br>Au total, ' . $nbFichiers . ' fichiers ont été supprimés.';
+
+        $mail->send();
+        echo 'Message Envoyé !';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
 
 
 // Supprimer l'utilisateur
@@ -85,6 +128,6 @@ $deleteUser = $conn->prepare('DELETE FROM users WHERE id_user = ?');
 $deleteUser->execute(array($id_user));
 
 session_destroy();
-header('Location: ../index.php');
+// header('Location: ../index.php');
 
 ?>
