@@ -6,5 +6,11 @@ fichiersClient/*
 # Ne pas ignorer le dossier fichiersClient lui-même
 !fichiersClient/
 
+# Ignorer tout le contenu du dossier facturesClient
+facturesClient/*
+
+# Ne pas ignorer le dossier facturesClient lui-même
+!facturesClient/
+
 # Ne pas ignorer ce fichier de maintien si nécessaire
 !.gitignore
