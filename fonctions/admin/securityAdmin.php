@@ -4,6 +4,6 @@ if(!isset($_SESSION['auth']) || $_SESSION['role'] !== "admin")
     {
         header('Location: ../../index.php');
     }   else {
-        print_r($_SESSION);
+        // Ne rien faire car on est admin
     }
 ?>
