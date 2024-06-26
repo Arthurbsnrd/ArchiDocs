@@ -8,6 +8,8 @@
         $id = $_SESSION['id_user'];
         $addStockage = $conn->prepare('UPDATE users SET stockage = stockage + 20 WHERE id_user = ?');
         $addStockage->execute(array($id));
+        // On appel qui fichier qui génére la facture pdf
+        require ('./genFacture.php');
         header("Location: ../../pages/clients/monCompte.php");
     }
     else

@@ -50,5 +50,4 @@ $filePath = $directory . "/Facture_" . ($nbFacture[0] + 1) . ".pdf";
 file_put_contents($filePath, $dompdf->output());
 
 
-header("Location: ../../pages/clients/monEspace.php");
 ?>
