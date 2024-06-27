@@ -1,7 +1,6 @@
 Estimation Budgétaire pour la Réalisation du Projet
 
-Pour fournir une estimation budgétaire réaliste pour la réalisation du projet, en supposant que vous êtes 3 développeurs professionnels et en incluant tous les coûts associés, 
-voici une analyse détaillée :
+Pour fournir une estimation budgétaire réaliste pour la réalisation du projet, en supposant que vous êtes 3 développeurs professionnels et en incluant tous les coûts associés, voici une analyse détaillée :
 
 ### Coûts de Développement
 
@@ -69,7 +68,6 @@ Additionnons tous ces coûts pour obtenir le budget total estimé :
 
 ### Conclusion
 
-Le budget estimé pour la réalisation du projet de gestion de fichiers clients est de 69,340€. Ce budget couvre le développement, le design, les tests, l'hébergement, 
-le stockage, les outils de gestion de projet, et le support technique pour une période initiale de 3 mois.
+Le budget estimé pour la réalisation du projet de gestion de fichiers clients est de 69,340€. Ce budget couvre le développement, le design, les tests, l'hébergement, le stockage, les outils de gestion de projet, et le support technique pour une période initiale de 3 mois.
 
 Ce budget est basé sur des taux horaires réalistes pour des professionnels dans le domaine et inclut tous les coûts nécessaires pour livrer une plateforme sécurisée et fonctionnelle répondant aux besoins décrits dans l'énoncé du projet.
