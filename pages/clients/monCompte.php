@@ -110,7 +110,6 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
         </div>
     </div>
     <?php include '../clients/cgu.php'; ?>
-
 </body>
 
 </html>
