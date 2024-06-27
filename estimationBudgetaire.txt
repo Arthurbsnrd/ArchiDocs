@@ -73,3 +73,5 @@ Le budget estimé pour la réalisation du projet de gestion de fichiers clients 
 le stockage, les outils de gestion de projet, et le support technique pour une période initiale de 3 mois.
 
 Ce budget est basé sur des taux horaires réalistes pour des professionnels dans le domaine et inclut tous les coûts nécessaires pour livrer une plateforme sécurisée et fonctionnelle répondant aux besoins. 
+
+
