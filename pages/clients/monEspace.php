@@ -141,6 +141,8 @@
             </div>
         </div>
     </div>
+
+    <?php include '../../includes/cgu.php'; ?>
 </body>
 
 </html>
