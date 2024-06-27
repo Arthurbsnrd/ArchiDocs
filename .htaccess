@@ -1,0 +1,14 @@
+# Empêcher l'indexation du répertoire
+Options -Indexes
+
+# Refuser tout accès aux fichiers dans ce dossier
+<FilesMatch "./fichiersClient*">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Autoriser l'accès aux fichiers spécifiques si nécessaire (exemple : autoriser l'accès au fichier spécifique)
+<FilesMatch "^fichier_specifique_autorise.ext$">
+    Order Deny,Allow
+    Allow from all
+</FilesMatch>

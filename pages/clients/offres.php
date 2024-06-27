@@ -1,3 +1,5 @@
+<?php include '../../fonctions/security.php'; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -35,7 +37,9 @@
                 </div>
 
                 <div class="btn-achat">
-                    <a href="" class="btn btn-success">Acheter</a>
+                    <form action="../../fonctions/clients/addStockage.php" method="POST">
+                        <button name="addStockage" class="btn btn-success" type="submit">Acheter</button>
+                    </form>
                 </div>
             </div>
         </div>

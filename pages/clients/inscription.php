@@ -1,3 +1,4 @@
+<?php require ("../../fonctions/clients/inscription.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -31,34 +32,34 @@
                     <p class="text-muted mb-4">Entrez vos informations afin de créer votre compte</p>
 
                     <!-- form -->
-                    <form method="post" action="">
+                    <form method="post" action="" onsubmit="return checkPassword(this)">
                         <div class="mb-3">
                             <label class="form-label required" for="nom">Nom</label>
                             <input type="text" id="nom" name="nom" required="required" class="form-control" placeholder="Entrez votre nom">
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label required" for="prénom">Prénom</label>
-                            <input type="text" id="prenom" name="prénom" required="required" class="form-control" placeholder="Entrez votre prénom">
+                            <label class="form-label required" for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" required="required" class="form-control" placeholder="Entrez votre prénom">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label required" for="username">Adresse e-mail</label>
-                            <input type="text" id="username" name="username" required="required" class="form-control" placeholder="Entrez votre adresse e-mail">
+                            <label class="form-label required" for="mail">Adresse e-mail</label>
+                            <input type="text" id="mail" name="mail" required="required" class="form-control" placeholder="Entrez votre adresse e-mail">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label required" for="password">Mot de passe</label>
-                            <input type="password" id="password" name="password" required="required" class="form-control" placeholder="Entrez votre mot de passe">
+                            <label class="form-label required" for="mdp">Mot de passe</label>
+                            <input type="password" id="mdp" name="mdp" required="required" class="form-control" placeholder="Entrez votre mot de passe">
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label required" for="password">Confirmer votre de passe</label>
-                            <input type="password" id="password" name="password" required="required" class="form-control" placeholder="Confirmer votre mot de passe">
+                            <label class="form-label required" for="mdpconfirme">Confirmer votre de passe</label>
+                            <input type="password" id="mdpconfirme" name="mdpconfirme" required="required" class="form-control" placeholder="Confirmer votre mot de passe">
                         </div>
 
                         <div class="d-grid mb-0 text-center">
-                        <button class="btn btn-primary btn-login" type="submit"><i class="fa-solid fa-user-plus"></i> S'inscrire</button>
+                        <button class="btn btn-primary btn-login" type="submit" name="validate"><i class="fa-solid fa-user-plus"></i> S'inscrire</button>
                         </div>
                     </form>
                     <small>
@@ -89,3 +90,19 @@
 </body>
 
 </html>
+
+<script>
+    // Fonction pour verifier si les mots de passe sont identiques
+    function checkPassword(form) {
+        password1 = form.mdp.value;
+        password2 = form.mdpconfirme.value;
+
+        // Si les mots de passe sont identiques
+        if (password1 == password2) {
+            return true;
+        } else {
+            alert("Les mots de passe ne sont pas identiques");
+            return false;
+        }
+    }
+</script>
