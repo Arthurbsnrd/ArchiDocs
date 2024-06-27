@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <?php include '../../includes/cgu.php'; ?>
+    <?php include '../clients/cgu.php'; ?>
 
 </body>
 
