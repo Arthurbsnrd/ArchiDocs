@@ -43,10 +43,14 @@ if ($stockageUsed['total'] == null) {
     $stockageUsed['total'] = 0;
     $stockageRestant = $userInfos['stockage'];
     $pourcentageStockage = 0;
-} else {
+} else if ($userInfos['stockage'] !== 0) {
     $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
     $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
     $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
+} else {
+    $stockageUsed = 0;
+    $stockageRestant = 0;
+    $pourcentageStockage = 0;
 }
 
 ?>
@@ -138,7 +142,11 @@ if ($stockageUsed['total'] == null) {
                         <div class="fichier-info">
                             <h3><a href="<?= $document["chemin"] ?>"><?= $document["nom_fichier"] ?></a></h3>
                             <p>Document <?= $type["libellé_type"] ?></p>
-                            <p>Taille: <?= round($document["taille"] / 1000000, 2) ?> Go</p>
+                            <?php if (number_format($document["taille"] / 1073741824, 2) != 0.00) : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1073741824, 2) ?> Go </p>
+                            <?php else : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1048576, 2) ?> Mo </p>
+                            <?php endif; ?>
                         </div>
                         <div class="fichier-action">
                             <a href="<?= $document["chemin"] ?>" download="<?= $document['nom_fichier'] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
