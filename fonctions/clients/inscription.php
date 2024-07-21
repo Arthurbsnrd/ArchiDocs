@@ -1,6 +1,17 @@
 <?php 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    //Load Composer's autoloader
+    require '../../vendor/autoload.php';
+    
     session_start();
     require ('../../fonctions/bdd.php'); // Chemin en partant du fichier d'inscription (form en front)
+
+    // Charger les variables d'environnement
+    $dotenv = Dotenv\Dotenv::createImmutable('../../'); // Chemin vers le fichier .env
+    $dotenv->load();
 
     // Validate the FORM
     if(isset($_POST['validate'])){
@@ -43,6 +54,35 @@
                     $_SESSION['role'] = $usersInfos['role'];
     
                     echo "Vous êtes inscrit sur le site";
+
+                    //Create an instance; passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                        $mail->isSMTP();                                            //Send using SMTP
+                        $mail->Host       = $_ENV['phpmailer_host'];                     //Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                        $mail->Username   = $_ENV['phpmailer_username'];                     //SMTP username
+                        $mail->Password   = $_ENV['phpmailer_password'];                               //SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                        $mail->Port       = $_ENV['phpmailer_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                        //Recipients
+                        $mail->setFrom($_ENV['phpmailer_username'], $_ENV['phpmailer_from_name']);
+                        $mail->addAddress($usersInfos['mail'], $usersInfos['prenom'] . ' ' . $usersInfos['nom']);     //Add a recipient
+
+                        //Content
+                        $mail->isHTML(true);                                  //Set email format to HTML
+                        $mail->Subject = 'Votre inscription chez ArchiDocs';
+                        $mail->Body    = 'Bonjour, votre compte <b>Archidocs</b> à été créé avec succès !';
+
+                        $mail->send();
+                        echo 'Message Envoyé !';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
     
                     header("Location: offres.php");
                 }
