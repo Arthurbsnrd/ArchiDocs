@@ -175,7 +175,7 @@ if ($stockageUsed['total'] == null) {
                             <label for="name" class="form-label">Nom du fichier</label>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="type" class="form-label">Type de fichier</label>
                             <select name="type" id="type" class="form-select">
                                 <option value="default">Choisir un type de fichier</option>
@@ -183,10 +183,10 @@ if ($stockageUsed['total'] == null) {
                                     <option value="<?= $type["id_type_fichier"] ?>"><?= $type["libellé_type"] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="file" class="form-label">Choisir un fichier</label>
-                            <input type="file" class="form-control" id="file" name="file">
+                            <input type="file" class="form-control" id="file" name="file" accept="image/*, application/pdf, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .ppt, .pptx, text/plain">
                         </div>
                         <button type="submit" class="btn btn-primary" name="add_document">Ajouter</button>
                     </form>
