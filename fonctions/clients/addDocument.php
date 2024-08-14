@@ -46,11 +46,30 @@ if(isset($_POST['add_document'])) {
         // Obtenir le type de fichier automatiquement
         $fileType = mime_content_type($filePath);
 
-        // Insérer les informations du fichier dans la base de données
-        $stmt = $conn->prepare("INSERT INTO fichiers (id_user, nom_fichier, taille, date, type_fichier, chemin) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute(array($_SESSION['id_user'], $name, $file['size'], date('Y-m-d H:i:s'), $fileType, $filePath));
+        // Associer le type MIME au type prédéfini
+        $fileTypeMapping = [
+            'application/msword' => 1, // Word
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 1, // Word (Docx)
+            'application/pdf' => 2, // PDF
+            'application/vnd.ms-excel' => 3, // Excel
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 3, // Excel (Xlsx)
+            'image/jpeg' => 4, // Image (Jpeg)
+            'image/png' => 4, // Image (Png)
+            'application/vnd.ms-powerpoint' => 5, // PowerPoint
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 5, // PowerPoint (Pptx)
+            'text/plain' => 6 // Texte
+        ];
 
-        echo "Le fichier a été téléchargé et les informations ont été enregistrées.";
+        $id_type = isset($fileTypeMapping[$fileType]) ? $fileTypeMapping[$fileType] : null;
+
+        if ($id_type !== null) {
+            // Insertion du fichier dans la base de données avec le type prédéfini
+            $stmt = $conn->prepare("INSERT INTO fichiers (id_user, nom_fichier, taille, date, id_type, chemin) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->execute(array($_SESSION['id_user'], $name, $file['size'], date('Y-m-d H:i:s'), $id_type, $filePath));
+
+            echo "Le fichier a été téléchargé et les informations ont été enregistrées.";
+         
+        }
 
         // Rediriger l'utilisateur vers la page monCompte.php
         header("Location: ../../pages/clients/monEspace.php");
