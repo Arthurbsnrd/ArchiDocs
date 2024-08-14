@@ -19,3 +19,5 @@ facturesClient/*
 .vscode/*
 .vscode
 settings.json
+
+.env
