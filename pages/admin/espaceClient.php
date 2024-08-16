@@ -1,30 +1,59 @@
-<?php include '../../fonctions/admin/securityAdmin.php';?>
-
 <?php
-    $documents = [
-        [
-            "id" => 1,
-            "name" => "Document 1",
-            "type" => "word",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ],
-        [
-            "id" => 2,
-            "name" => "Document 2",
-            "type" => "pdf",
-            "size" => "25mo",
-            "date" => "23/03/2024"
-        ],
-        [
-            "id" => 3,
-            "name" => "Document 3",
-            "type" => "excel",
-            "size" => "25mo",
-            "date" => "03/02/2024"
-        ]
-    ];
-    
+    include '../../fonctions/admin/securityAdmin.php';
+    include '../../fonctions/bdd.php';
+
+    // Ici on va récupérer les infos de l'utilisateur pour les afficher
+    $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
+    $queryUser->execute(array($_GET['id']));
+    $userInfos = $queryUser->fetch();
+
+
+    // Récupération des fichiers de l'utilisateur avec l'id de session
+    $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ? ORDER BY id_fichier DESC');
+    $queryDocuments->execute(array($_GET['id']));
+    $documents = $queryDocuments->fetchAll();
+
+
+    // Récupération des fichiers avec tri 
+    $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'id_fichier';
+    $sortOrder = 'DESC';
+
+    if ($sortOption === 'date') {
+        $orderBy = 'date';
+    } elseif ($sortOption === 'taille') {
+        $orderBy = 'taille';
+    } else {
+        $orderBy = 'id_fichier';
+    }
+
+    $queryDocuments = $conn->prepare("SELECT * FROM fichiers WHERE id_user = ? ORDER BY $orderBy $sortOrder");
+    $queryDocuments->execute(array($_GET['id']));
+    $documents = $queryDocuments->fetchAll();
+
+
+    // Récupérer les types de fichiers
+    $queryTypes = $conn->prepare('SELECT * FROM types_fichier');
+    $queryTypes->execute();
+    $types = $queryTypes->fetchAll();
+
+    // Récupération du stockage utilisé par l'utilisateur
+    $queryStockageUsed = $conn->prepare('SELECT SUM(taille) as total FROM fichiers WHERE id_user = ?');
+    $queryStockageUsed->execute(array($_GET['id']));
+    $stockageUsed = $queryStockageUsed->fetch();
+
+    if ($stockageUsed['total']  == null) {
+        $stockageUsed['total'] = 0;
+        $stockageRestant = $userInfos['stockage'];
+        $pourcentageStockage = 0;
+    } else if ($userInfos['stockage'] !== 0) {
+        $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
+        $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
+        $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
+    } else {
+        $stockageUsed = 0;
+        $stockageRestant = 0;
+        $pourcentageStockage = 0;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +62,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace de NOMCLIENT | ArchiDocs</title>
+    <title>Espace de <?= $userInfos['nom'] . " " . $userInfos['prenom'] ?> | ArchiDocs</title>
     <link rel="stylesheet" href="../../styles/base.css">
     <link rel="stylesheet" href="../../styles/espaceClient.css">
     <script src="../../js/navbar.js" defer></script>
@@ -53,7 +82,7 @@
     
     <div class="contenue espaceDuClient">
         <div class="header-espace">
-            <h1>Bienvenue dans l'espace de NOMCLIENT</h1>
+            <h1>Bienvenue dans l'espace de <?= $userInfos['nom'] . " " . $userInfos['prenom'] ?></h1>
             <p>Retrouvez ici tout ses documents</p>
         </div>
         
@@ -61,63 +90,126 @@
             <div class="les-fichiers">
                 <div class="stockage">
                     <div class="progress" style="color: black;">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">Utilisation de 15Go</div>
-                        Espace restant: 5Go
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?= $pourcentageStockage; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $pourcentageStockage; ?>%;">Utilisation de <?= $stockageUsed; ?>Go</div>
+                        <?php if ($stockageRestant > 0) { ?>
+                            Espace restant: <?= round($stockageRestant, 2); ?>Go
+                        <?php } ?>
                     </div>
                     <div class="total-stock">
                         <h5>
-                            Total: 20Go
-                        </h5>    
+                            Total: <?= $userInfos['stockage']; ?>Go
+                        </h5>
                     </div>
                 </div>
                 <div class="div-btn-upload">
-                    <!-- trier les fichier -->
+
+                    <!-- Trier les fichiers -->
                     <div class="tri-fichier">
-                        <select name="tri" id="tri" class="btn btn-dark">
+                        <select name="tri" id="tri" class="btn btn-dark" onchange="updateSorting()">
                             <option value="default">Trier par...</option>
-                            <option value="date">Trier par date</option>
-                            <option value="date">Trier par taille</option>
+                            <option value="date">Date</option>
+                            <option value="taille">Taille</option>
                         </select>
-                            <select name="filtre" id="filtre" class="btn btn-dark">
-                                <option value="default">Filtrer par...</option>
-                                <?php foreach($documents as $document): ?>
-                                    <option value="<?= $document["type"] ?>">Filtrer par <?= $document["type"] ?></option>
-                                <?php endforeach; ?>                                
-                            </select>
+                        <select name="filtre" id="filtre" class="btn btn-dark">
+                            <option value="all">Tous les types</option>
+                            <?php foreach ($types as $type) : ?>
+                                <option value="<?= strtolower($type["libellé_type"]); ?>"><?= $type["libellé_type"] ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
-                <!-- barre de recherche -->
+                <!-- Barre de recherche -->
                 <div class="search-bar mb-3">
                     <input type="text" class="form-control" placeholder="Rechercher un document">
                 </div>
-                
-                <?php foreach($documents as $document): ?>
-                    <div class="fichier">
+                <?php if (empty($documents)) : ?>
+                    <div class="alert alert-warning" role="alert">
+                        L'utilisateur n'a pas uploader de document pour le moment.
+                    </div>
+                <?php endif; ?>
+                <?php foreach ($documents as $document) : ?>
+                    <?php
+                    $queryType = $conn->prepare('SELECT * FROM types_fichier WHERE id_type_fichier = ?');
+                    $queryType->execute(array($document["id_type"]));
+                    $type = $queryType->fetch();
+                    ?>
+                    <div class="fichier <?= strtolower($type["libellé_type"]); ?>">
                         <div class="fichier-img">
-                            <?php if($document["type"] == "word"): ?>
-                                <i class="fas fa-file-word"></i>
-                            <?php elseif($document["type"] == "pdf"): ?>
-                                <i class="fas fa-file-pdf"></i>
-                            <?php elseif($document["type"] == "excel"): ?>
-                                <i class="fas fa-file-excel"></i>
-                            <?php endif; ?>
+                            <?= $type["logo"] ?>
                             <small><?= $document["date"] ?></small>
                         </div>
                         <div class="fichier-info">
-                            <h3><a href=""><?= $document["name"] ?></a></h3>
-                            <p>Document <?= $document["type"] ?></p>
-                            <p>Taille: <?= $document["size"] ?></p>
+                            <h3><a href="<?= $document["chemin"] ?>"><?= $document["nom_fichier"] ?></a></h3>
+                            <p>Document <?= $type["libellé_type"] ?></p>
+                            <?php if (number_format($document["taille"] / 1073741824, 2) != 0.00) : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1073741824, 2) ?> Go </p>
+                            <?php else : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1048576, 2) ?> Mo </p>
+                            <?php endif; ?>
                         </div>
                         <div class="fichier-action">
-                            <a href="" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
-                            <a href="" class="btn btn-danger">Supprimer <i class="bi bi-trash"></i></a>
+                            <a href="<?= $document["chemin"] ?>" download="<?= $document['nom_fichier'] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
+                            <form action="../../fonctions/clients/delDocument.php" method="post">
+                                <input type="hidden" name="id_fichier" value="<?= $document["id_fichier"] ?>">
+                                <button type="submit" class="btn btn-danger" name="del_document">Supprimer <i class="bi bi-trash"></i></button>
+                            </form>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
+        <div class="liste-fichier">
+            <div class="les-fichiers">
+                <div class="information_utilisateur">
+                    <h2>Informations sur l'utilisateur</h2>
+                    <div class="information-utilisateur">
+                        <div class="information-utilisateur-info">
+                            <h3><?= $userInfos['nom'] . " " . $userInfos['prenom'] ?></h3>
+                            <p>Email: <?= $userInfos['mail'] ?></p>
+                            <p>Téléphone: <?= $userInfos['tel'] ?? "Non renseigné" ?></p>
+                            <p>Adresse:  <?= $userInfos['adresse'] ?? "Non renseigné"?></p> 
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
+
+
+<script>
+    //focntion de recherche fichiers par nom de fichier
+    document.querySelector('.search-bar input').addEventListener('input', function() {
+        var search = this.value.toLowerCase();
+        var allFiles = document.querySelectorAll('.fichier h3');
+        allFiles.forEach(file => {
+            if (file.textContent.toLowerCase().includes(search)) {
+                file.parentElement.parentElement.style.display = '';
+            } else {
+                file.parentElement.parentElement.style.display = 'none';
+            }
+        });
+    });
+
+
+    //fonction pour trier les fichiers
+    function updateSorting() {
+        const tri = document.getElementById('tri').value;
+        window.location.href = `monEspace.php?sort=${tri}`;
+    }
+    //fonction pour filtrer les fichiers
+
+    document.getElementById('filtre').addEventListener('change', function() {
+        var type = this.value;
+        var allFiles = document.querySelectorAll('.fichier');
+        allFiles.forEach(file => {
+            if (type === 'all' || file.classList.contains(type)) {
+                file.style.display = '';
+            } else {
+                file.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </html>
