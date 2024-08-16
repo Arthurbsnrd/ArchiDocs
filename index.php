@@ -10,8 +10,8 @@
     <link rel="shortcut icon" href="./assets/ArchiDocs-Logo.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
-
 
 <body class="authentication-bg pb-0">
 
@@ -44,11 +44,13 @@
                         </div>
 
                         <div class="d-grid mb-0 text-center">
-                        <button class="btn btn-primary btn-login" type="submit" name="connexion"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
+                            <button class="btn btn-primary btn-login" type="submit" name="connexion"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
                         </div>
                     </form>
                     <small>
                         <p class="text-center mt-3">Vous n'avez pas de compte ? <a href="./pages/clients/inscription.php" class="text-primary">S'inscrire</a></p>
+                        <!-- Lien pour ouvrir la modal CGU -->
+                        <p class="text-center mt-1"><a href="#" id="cgu-link" class="text-primary">Conditions Générales d'Utilisation</a></p>
                     </small>
                     <!-- end form-->
                 </div>
@@ -72,6 +74,34 @@
         <!-- end Auth fluid right content -->
     </div>
     <!-- end auth-fluid-->
+
+    <!-- Modal pour les CGU -->
+    <div class="modal fade" id="cguModal" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cguModalLabel">Conditions Générales d'Utilisation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php include './fonctions/clients/cgu.php'; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour afficher la modal CGU
+        document.getElementById('cgu-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            var cguModal = new bootstrap.Modal(document.getElementById('cguModal'));
+            cguModal.show();
+        });
+    </script>
+
 </body>
 
 </html>
