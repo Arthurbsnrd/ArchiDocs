@@ -43,10 +43,14 @@ if ($stockageUsed['total'] == null) {
     $stockageUsed['total'] = 0;
     $stockageRestant = $userInfos['stockage'];
     $pourcentageStockage = 0;
-} else {
+} else if ($userInfos['stockage'] !== 0) {
     $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
     $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
     $pourcentageStockage = ($stockageUsed / $userInfos['stockage']) * 100;
+} else {
+    $stockageUsed = 0;
+    $stockageRestant = 0;
+    $pourcentageStockage = 0;
 }
 
 ?>
@@ -138,7 +142,11 @@ if ($stockageUsed['total'] == null) {
                         <div class="fichier-info">
                             <h3><a href="<?= $document["chemin"] ?>"><?= $document["nom_fichier"] ?></a></h3>
                             <p>Document <?= $type["libellé_type"] ?></p>
-                            <p>Taille: <?= round($document["taille"] / 1000000, 2) ?> Go</p>
+                            <?php if (number_format($document["taille"] / 1073741824, 2) != 0.00) : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1073741824, 2) ?> Go </p>
+                            <?php else : ?>
+                                <p>Taille: <?= number_format($document["taille"] / 1048576, 2) ?> Mo </p>
+                            <?php endif; ?>
                         </div>
                         <div class="fichier-action">
                             <a href="<?= $document["chemin"] ?>" download="<?= $document['nom_fichier'] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
@@ -168,17 +176,8 @@ if ($stockageUsed['total'] == null) {
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="mb-3">
-                            <label for="type" class="form-label">Type de fichier</label>
-                            <select name="type" id="type" class="form-select">
-                                <option value="default">Choisir un type de fichier</option>
-                                <?php foreach ($types as $type) : ?>
-                                    <option value="<?= $type["id_type_fichier"] ?>"><?= $type["libellé_type"] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label for="file" class="form-label">Choisir un fichier</label>
-                            <input type="file" class="form-control" id="file" name="file">
+                            <input type="file" class="form-control" id="file" name="file" accept="image/*, application/pdf, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .ppt, .pptx, text/plain">
                         </div>
                         <button type="submit" class="btn btn-primary" name="add_document">Ajouter</button>
                     </form>
@@ -186,7 +185,7 @@ if ($stockageUsed['total'] == null) {
             </div>
         </div>
     </div>
-    <?php include '../clients/cgu.php'; ?>
+    <!-- <?php include '../clients/cgu.php'; ?> -->
 </body>
 
 <script>

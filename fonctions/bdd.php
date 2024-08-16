@@ -2,7 +2,7 @@
 //connection locale
 $servername = "localhost";
 $username = "root";
-$password = "respons11";
+$password = "";
 $dbname = "archidocs";
 
 try {

@@ -14,6 +14,12 @@ require '../vendor/autoload.php';
 session_start();
 require ('../fonctions/bdd.php'); // Chemin en partant du fichier d'inscription (form en front)
 
+
+// Charger les variables d'environnement
+$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv->load();
+
+
 $id_user = $_SESSION['id_user'];
 
 // Récupérer tout les fichier de l'utilisateur
@@ -65,15 +71,15 @@ if (!empty($userInfos)) {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->Host       = $_ENV['phpmailer_host'];                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
-        $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
+        $mail->Username   = $_ENV['phpmailer_username'];                     //SMTP username
+        $mail->Password   = $_ENV['phpmailer_password'];                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = $_ENV['phpmailer_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
+        $mail->setFrom($_ENV['phpmailer_username'], $_ENV['phpmailer_from_name']);
         $mail->addAddress($userInfos['mail'], $userInfos['prenom'] . ' ' . $userInfos['nom']);     //Add a recipient
 
         //Content
@@ -97,15 +103,15 @@ if (!empty($adminInfos)) {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->Host       = $_ENV['phpmailer_host'];                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'anaselkhiat78@gmail.com';                     //SMTP username
-        $mail->Password   = 'ucspkoolbbzfokjo';                               //SMTP password
+        $mail->Username   = $_ENV['phpmailer_username'];                     //SMTP username
+        $mail->Password   = $_ENV['phpmailer_password'];                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = $_ENV['phpmailer_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('anaselkhiat78@gmail.com', 'ArchiDocs');
+        $mail->setFrom($_ENV['phpmailer_username'], $_ENV['phpmailer_from_name']);
         $mail->addAddress($adminInfos['mail']);     //Add a recipient
 
         //Content
