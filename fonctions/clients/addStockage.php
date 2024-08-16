@@ -21,7 +21,7 @@
                 $mail->SMTPSecure = 'tls'; // tls SI TU PEU VERIFIER SI CEST BIEN CA
                 $mail->Port = 587;  // PorT AUSSI A VERIFIER
 
-                $mail->setFrom('from@example.com', 'Archidocs');
+                $mail->setFrom('from@example.com', 'Archidocs'); // mail   anaselkhiat78@gmail.com ?
                 $mail->addAddress($_SESSION['mail']); 
 
                 $mail->isHTML(true);
