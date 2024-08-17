@@ -16,6 +16,11 @@ $stockageUsed = $stockageUsed['total'] / 1000000; // On convertit en Go
 
 $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
 
+// Récupérer les factures de l'utilisateur
+$queryFactures = $conn->prepare('SELECT * FROM factures WHERE id_user = ?');
+$queryFactures->execute(array($_SESSION['id_user']));
+$factures = $queryFactures->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -81,6 +86,41 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
             </p>
             <a href="./monEspace.php" class="btn btn-info  btn-achat-stock btn-look-fich">Consulter mes fichiers</a>
         </div>
+        <div class="factures monCompte-element">
+            <h5>Factures</h5>
+            <p>
+                Vous avez <?= count($factures); ?> factures.
+            </p>
+            <span  style="width: 100%; display: flex; justify-content: flex-end;">
+                <button class="btn btn-dark" id="toggle_facture"><i class="fas fa-chevron-down"></i></button>
+            </span>
+            <?php if (count($factures) > 0) : ?>
+                <table class="table table-striped" id="factures_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numéro de facture</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">Télécharger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($factures as $facture) : ?>
+                            <tr>
+                                <td>
+                                    <?= $facture['nom_facture'] ?>
+                                </td>
+                                <td><?= $facture['date'] ?></td>
+                                <td><?= $facture['prix_ttc'] ?> €</td>
+                                <td>
+                                    <a href="../../facturesClient/<?= $userInfos['nom'].$userInfos['prenom'] ?>/<?= $facture["nom_facture"]?>.pdf" download="<?= $facture['nom_facture'].$userInfos["nom"].$userInfos["prenom"] ?>" class="btn btn-dark">Télécharger <i class="bi bi-download"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
         <div class="supp-compte monCompte-element">
             <h5>Supprimer mon compte</h5>
             <p>
@@ -111,5 +151,16 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
     </div>
     <!-- <?php include '../clients/cgu.php'; ?> -->
 </body>
-
+<script>
+    // Fonction pour afficher/masquer les factures
+    function toggle_facture() {
+        const facture = document.getElementById('factures_table');
+        if (facture.style.display === 'none') {
+            facture.style.display = '';
+        } else {
+            facture.style.display = 'none';
+        }
+    }
+    document.getElementById('toggle_facture').addEventListener('click', toggle_facture);
+</script>
 </html>

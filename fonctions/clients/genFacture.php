@@ -23,7 +23,7 @@ $nbFacture = $reqNbFacture->fetch();
 // Insertion de la facture dans la BDD
 $factureSql = "INSERT INTO factures (id_user, nom_facture, date, prix_ht, prix_ttc, quantite, TVA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $reqFacture = $conn->prepare($factureSql);
-$reqFacture->execute(array($id, "Facture_".$nbFacture[0]+1 ."946", date('Y-m-d'), 16, 20, 1, 20));
+$reqFacture->execute(array($id, "Facture_".$nbFacture[0]+1, date('Y-m-d'), 16, 20, 1, 20));
 
 ob_start(); // On démarre le buffer
 require_once './factureSquelette.php'; // On inclut le fichier facture.php
