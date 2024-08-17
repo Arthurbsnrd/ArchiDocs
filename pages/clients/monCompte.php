@@ -8,6 +8,7 @@ $queryUser = $conn->prepare('SELECT * FROM users WHERE id_user = ?');
 $queryUser->execute(array($_SESSION['id_user']));
 $userInfos = $queryUser->fetch();
 
+
 $queryStockageUsed = $conn->prepare('SELECT SUM(taille) as total FROM fichiers WHERE id_user = ?');
 $queryStockageUsed->execute(array($_SESSION['id_user']));
 $stockageUsed = $queryStockageUsed->fetch();
@@ -30,11 +31,12 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icon Bootstrap -->
 </head>
+
 
 <body>
     <?php include '../../includes/navbar.php'; ?>
@@ -86,33 +88,9 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
                 Vous perdrez l'ensemble de vos fichiers stockés sur notre site et ne pourrez plus les récupérer.
             </p>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delCompte">Supprimer mon compte</button>
-        </div>
 
-        <!-- Lien pour ouvrir la modal CGU -->
-        <div class="cgu-link">
-            <a href="#" id="cgu-link" class="text-primary">Conditions Générales d'Utilisation</a>
         </div>
     </div>
-
-    <!-- Modal pour les CGU -->
-    <div class="modal fade" id="cguModal" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cguModalLabel">Conditions Générales d'Utilisation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php include '../../fonctions/clients/cgu.php'; ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour suppression de compte -->
     <div class="modal fade" id="delCompte" tabindex="-1" aria-labelledby="delCompteLabel" aria-hidden="true" style="color: black;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -131,15 +109,7 @@ $stockageRestant =  $userInfos['stockage'] - $stockageUsed;
             </div>
         </div>
     </div>
-
-    <script>
-        // Fonction pour afficher la modal CGU
-        document.getElementById('cgu-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            var cguModal = new bootstrap.Modal(document.getElementById('cguModal'));
-            cguModal.show();
-        });
-    </script>
+    <!-- <?php include '../clients/cgu.php'; ?> -->
 </body>
 
 </html>

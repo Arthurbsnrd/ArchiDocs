@@ -1,3 +1,4 @@
+<?php require ("../../fonctions/clients/inscription.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -7,14 +8,15 @@
     <title>Inscription | ArchiDocs</title>
     <link rel="stylesheet" href="../../styles/index.css">
     <link rel="shortcut icon" href="../../assets/ArchiDocs-Logo.png"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
 </head>
+
 
 <body class="authentication-bg pb-0">
 
     <div class="login-page">
-        <!-- Auth fluid left content -->
+        <!--Auth fluid left content -->
         <div class="login-form">
             <div class="card-body d-flex flex-column h-100 gap-3">
                 <!-- Logo -->
@@ -52,12 +54,12 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label required" for="mdpconfirme">Confirmer votre mot de passe</label>
+                            <label class="form-label required" for="mdpconfirme">Confirmer votre de passe</label>
                             <input type="password" id="mdpconfirme" name="mdpconfirme" required="required" class="form-control" placeholder="Confirmer votre mot de passe">
                         </div>
 
                         <div class="d-grid mb-0 text-center">
-                            <button class="btn btn-primary btn-login" type="submit" name="validate"><i class="fa-solid fa-user-plus"></i> S'inscrire</button>
+                        <button class="btn btn-primary btn-login" type="submit" name="validate"><i class="fa-solid fa-user-plus"></i> S'inscrire</button>
                         </div>
                     </form>
                     <small>
@@ -68,10 +70,8 @@
 
                 <!-- Footer-->
                 <footer class="footer footer-alt">
-                    <div class="text-center">
-                        <p><a href="#" id="cgu-link" class="text-primary" data-bs-toggle="modal" data-bs-target="#cguModal">Conditions Générales d'Utilisation</a></p>
-                    </div>
                 </footer>
+
             </div> <!-- end .card-body -->
         </div>
         <!-- end auth-fluid-form-box-->
@@ -84,46 +84,25 @@
                 </p>
             </div> <!-- end auth-user-testimonial-->
         </div>
-
         <!-- end Auth fluid right content -->
     </div>
-    
     <!-- end auth-fluid-->
-
-    <!-- Modal pour afficher les CGU -->
-    <div class="modal fade" id="cguModal" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cguModalLabel">Conditions Générales d'Utilisation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php include '../../fonctions/clients/cgu.php'; ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Fonction pour vérifier si les mots de passe sont identiques
-        function checkPassword(form) {
-            const password1 = form.mdp.value;
-            const password2 = form.mdpconfirme.value;
-
-            // Si les mots de passe sont identiques
-            if (password1 === password2) {
-                return true;
-            } else {
-                alert("Les mots de passe ne sont pas identiques");
-                return false;
-            }
-        }
-    </script>
 </body>
 
 </html>
+
+<script>
+    // Fonction pour verifier si les mots de passe sont identiques
+    function checkPassword(form) {
+        password1 = form.mdp.value;
+        password2 = form.mdpconfirme.value;
+
+        // Si les mots de passe sont identiques
+        if (password1 == password2) {
+            return true;
+        } else {
+            alert("Les mots de passe ne sont pas identiques");
+            return false;
+        }
+    }
+</script>

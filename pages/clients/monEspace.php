@@ -12,6 +12,7 @@ $queryDocuments = $conn->prepare('SELECT * FROM fichiers WHERE id_user = ? ORDER
 $queryDocuments->execute(array($_SESSION['id_user']));
 $documents = $queryDocuments->fetchAll();
 
+
 // Récupération des fichiers avec tri 
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'id_fichier';
 $sortOrder = 'DESC';
@@ -27,6 +28,7 @@ if ($sortOption === 'date') {
 $queryDocuments = $conn->prepare("SELECT * FROM fichiers WHERE id_user = ? ORDER BY $orderBy $sortOrder");
 $queryDocuments->execute(array($_SESSION['id_user']));
 $documents = $queryDocuments->fetchAll();
+
 
 // Récupérer les types de fichiers
 $queryTypes = $conn->prepare('SELECT * FROM types_fichier');
@@ -73,6 +75,8 @@ if ($stockageUsed['total'] == null) {
     <!-- Icon Bootstrap -->
 </head>
 
+
+
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
@@ -80,8 +84,6 @@ if ($stockageUsed['total'] == null) {
         <div class="header-espace">
             <h1>Bienvenue sur votre espace</h1>
             <p>Retrouvez ici tout vos documents et ajoutez en d'autre si besoin</p>
-            <!-- Lien pour ouvrir la modal CGU -->
-            <p><a href="#" id="cgu-link" class="text-primary">Conditions Générales d'Utilisation</a></p>
         </div>
 
         <div class="liste-fichier">
@@ -159,64 +161,66 @@ if ($stockageUsed['total'] == null) {
         </div>
     </div>
 
-    <!-- Modal pour les CGU -->
-    <div class="modal fade" id="cguModal" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <!-- Modal -->
+    <div class="modal fade upload-modal" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cguModalLabel">Conditions Générales d'Utilisation</h5>
+                    <h5 class="modal-title" id="uploadModalLabel">Ajouter un document</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <?php include '../../fonctions/clients/cgu.php'; ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <div class="modal-body upload-form">
+                    <form action="../../fonctions/clients/addDocument.php" enctype="multipart/form-data" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom du fichier</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Choisir un fichier</label>
+                            <input type="file" class="form-control" id="file" name="file" accept="image/*, application/pdf, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .ppt, .pptx, text/plain">
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="add_document">Ajouter</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Fonction de recherche de fichiers par nom de fichier
-        document.querySelector('.search-bar input').addEventListener('input', function() {
-            var search = this.value.toLowerCase();
-            var allFiles = document.querySelectorAll('.fichier h3');
-            allFiles.forEach(file => {
-                if (file.textContent.toLowerCase().includes(search)) {
-                    file.parentElement.parentElement.style.display = '';
-                } else {
-                    file.parentElement.parentElement.style.display = 'none';
-                }
-            });
-        });
-
-        // Fonction pour trier les fichiers
-        function updateSorting() {
-            const tri = document.getElementById('tri').value;
-            window.location.href = `monEspace.php?sort=${tri}`;
-        }
-
-        // Fonction pour filtrer les fichiers
-        document.getElementById('filtre').addEventListener('change', function() {
-            var type = this.value;
-            var allFiles = document.querySelectorAll('.fichier');
-            allFiles.forEach(file => {
-                if (type === 'all' || file.classList.contains(type)) {
-                    file.style.display = '';
-                } else {
-                    file.style.display = 'none';
-                }
-            });
-        });
-
-        // Fonction pour afficher la modal CGU
-        document.getElementById('cgu-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            var cguModal = new bootstrap.Modal(document.getElementById('cguModal'));
-            cguModal.show();
-        });
-    </script>
+    <!-- <?php include '../clients/cgu.php'; ?> -->
 </body>
+
+<script>
+    //focntion de recherche fichiers par nom de fichier
+    document.querySelector('.search-bar input').addEventListener('input', function() {
+        var search = this.value.toLowerCase();
+        var allFiles = document.querySelectorAll('.fichier h3');
+        allFiles.forEach(file => {
+            if (file.textContent.toLowerCase().includes(search)) {
+                file.parentElement.parentElement.style.display = '';
+            } else {
+                file.parentElement.parentElement.style.display = 'none';
+            }
+        });
+    });
+
+
+    //fonction pour trier les fichiers
+    function updateSorting() {
+        const tri = document.getElementById('tri').value;
+        window.location.href = `monEspace.php?sort=${tri}`;
+    }
+    //fonction pour filtrer les fichiers
+
+    document.getElementById('filtre').addEventListener('change', function() {
+        var type = this.value;
+        var allFiles = document.querySelectorAll('.fichier');
+        allFiles.forEach(file => {
+            if (type === 'all' || file.classList.contains(type)) {
+                file.style.display = '';
+            } else {
+                file.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </html>

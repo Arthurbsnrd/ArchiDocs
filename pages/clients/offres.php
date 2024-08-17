@@ -13,8 +13,11 @@
     <link rel="shortcut icon" href="../../assets/ArchiDocs-Logo.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3181ebab68.js" crossorigin="anonymous"></script>
+    <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Icon Bootstrap -->
 </head>
+
 
 <body>
     <?php include '../../includes/navbar.php'; ?>
@@ -41,38 +44,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Lien vers la modal des CGU -->
-    <div class="text-center mt-3">
-        <p><a href="#" id="cgu-link" class="text-primary">Conditions Générales d'Utilisation</a></p>
-    </div>
-
-    <!-- Modal pour afficher les CGU -->
-    <div class="modal fade" id="cguModal" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cguModalLabel">Conditions Générales d'Utilisation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php include '../../fonctions/clients/cgu.php'; ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-0z2PY86A1ZR8BbJ6J3ONISL7Yk96RmtqNBH+LOzI5mds8VJY6k9A8R7q8yKt6w2m" crossorigin="anonymous"></script>
-    <script>
-        document.getElementById('cgu-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            var cguModal = new bootstrap.Modal(document.getElementById('cguModal'));
-            cguModal.show();
-        });
-    </script>
+    <!-- <?php include '../clients/cgu.php'; ?> -->
 </body>
 
 </html>
