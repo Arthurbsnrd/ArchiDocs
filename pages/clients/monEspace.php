@@ -185,7 +185,7 @@ if ($stockageUsed['total'] == null) {
             </div>
         </div>
     </div>
-    <!-- <?php include '../clients/cgu.php'; ?> -->
+    <?php include '../../includes/footer.php'; ?>
 </body>
 
 <script>

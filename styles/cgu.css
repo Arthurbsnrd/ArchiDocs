@@ -1,45 +1,10 @@
-div.cgu-bg{
-    background-image: linear-gradient(to right top, #000000, #200413, #320425, #40003e, #45005e);
-    color: white;
+.cgu-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80vw;
+    padding: 30px;
 }
-
-
-div.cgu-content{
-    width: 100%;
-    background-image: linear-gradient(to right top, #000000, #200413, #320425, #40003e, #45005e);
-    color: white;
-}   
-
-   .cgu-content{
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: center;
-       width: 100vw;
-       padding: 30px;
-   }
-   
-   .cgu-content h2{
-       font-size: xx-large;
-       color: white;
-       text-align: center;
-   }
-   
-   .cgu-content p{
-       font-size: large;
-       color: white;
-       text-align: center;
-   }
-   
-   .cgu-content a{
-       color: white;
-       text-decoration: none;
-   }
-   
-   .cgu-content a:hover{
-       color: white;
-       text-decoration: underline;
-   }
-
-
-
