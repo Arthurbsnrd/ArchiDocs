@@ -13,15 +13,15 @@
     .container-footer {        
         width: 100%;
         align-items: center;
-        color: white;
+        color: black;
     }
     .container-footer a {
-        color: white;
+        color: black;
     }
     .container-footer a:hover {
-        color: white;
+        color: black;
     }
     body {
-        background-color: #212529;
+        background-color: #f2f2f2;
     }
 </style>

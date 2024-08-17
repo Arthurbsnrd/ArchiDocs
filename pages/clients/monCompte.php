@@ -149,7 +149,7 @@ $factures = $queryFactures->fetchAll();
             </div>
         </div>
     </div>
-    <!-- <?php include '../clients/cgu.php'; ?> -->
+    <?php include '../../includes/footer.php'; ?>
 </body>
 <script>
     // Fonction pour afficher/masquer les factures
