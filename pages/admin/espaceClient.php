@@ -195,7 +195,7 @@
     //fonction pour trier les fichiers
     function updateSorting() {
         const tri = document.getElementById('tri').value;
-        window.location.href = `monEspace.php?sort=${tri}`;
+        window.location.href = `espaceClient.php?id=<?= $_GET['id'] ?>&sort=${tri}`;
     }
     //fonction pour filtrer les fichiers
 
