@@ -6,9 +6,3 @@ Options -Indexes
     Order Allow,Deny
     Deny from all
 </FilesMatch>
-
-# Autoriser l'accès aux fichiers spécifiques si nécessaire (exemple : autoriser l'accès au fichier spécifique)
-<FilesMatch "^fichier_specifique_autorise.ext$">
-    Order Deny,Allow
-    Allow from all
-</FilesMatch>
