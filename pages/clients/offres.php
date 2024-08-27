@@ -33,7 +33,7 @@
                 <div class="prix-card"><span class="prix">20</span> €</div>
     
                 <div class="description-card">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto nisi aperiam quam facilis corporis ducimus, assumenda nihil necessitatibus culpa veritatis.
+                    Avec cette offre à seulement 1€ par giga, soyez sûr de ne jamais manquer de stockage sans vous ruiner !
                 </div>
 
                 <div class="btn-achat">
