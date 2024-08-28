@@ -73,6 +73,9 @@
         <h1>Facture ArchiDocs</h1>
         <h3>ArchiDocs</h3>
         <h4>Siret : 88871611732114</h4>
+        <h4>Adresse : 8 Rue Germain Soufflot, 78180 Montigny-le-Bretonneux</h4>
+        <h4>Mail : support@archidoc.fr</h4>
+        <h4>Téléphone : 06.12.34.56.78</h4>
     </div>
 
     <div class="infosFacture">
@@ -107,8 +110,8 @@
     <div class="infosClient">
         <h3>Nom : <?= $userInfos['nom'] ?></h3>
         <h3>Prenom : <?= $userInfos['prenom'] ?></h3>
-        <h3>Téléphone : <?= $userInfos['tel'] ?></h3>
-        <h3>Adresse : <?= $userInfos['adresse'] ?></h3>
+        <h3>Téléphone : <?= $userInfos['tel'] ?? "non renseignée" ?></h3>
+        <h3>Adresse : <?= $userInfos['adresse'] ?? "non renseignée" ?></h3>
     </div>
 </body>
 
