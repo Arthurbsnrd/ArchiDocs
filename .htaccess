@@ -6,3 +6,9 @@ Options -Indexes
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+# Refuser tout accès aux fichiers dans ce dossier
+<FilesMatch "./facturesClient*">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
