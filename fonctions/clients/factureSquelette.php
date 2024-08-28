@@ -113,6 +113,10 @@
         <h3>Téléphone : <?= $userInfos['tel'] ?? "non renseignée" ?></h3>
         <h3>Adresse : <?= $userInfos['adresse'] ?? "non renseignée" ?></h3>
     </div>
+
+    <div class="total">
+        <h2>Total à payer: 20.00€</h2>
+    </div>
 </body>
 
 </html>
