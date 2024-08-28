@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -135,5 +137,6 @@ $deleteUser->execute(array($id_user));
 
 session_destroy();
 header('Location: ../index.php');
+ob_end_flush(); // Envoyer le tampon de sortie et arrêter la mise en tampon
 
 ?>
